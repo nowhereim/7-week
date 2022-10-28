@@ -6,7 +6,15 @@ class MembersService {
   constructor() {
     this.membersRepository = new MembersRepository();
   }
-  createMember = async (id, password, confirm, name, email, phoneNum, birthday) => {
+  createMember = async (
+    id,
+    password,
+    confirm,
+    name,
+    email,
+    phoneNum,
+    birthday
+  ) => {
     const existsId = await this.membersRepository.findMember(id);
     if (existsId) {
       throw { message: "아이디가 이미 존재합니다" };

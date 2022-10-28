@@ -1,4 +1,4 @@
-const MembersService = require("../services/members");
+const MembersService = require("../service/members");
 const Joi = require("joi");
 
 const schema = Joi.object({
@@ -6,7 +6,10 @@ const schema = Joi.object({
   name: Joi.string().min(2).max(7),
   password: Joi.string().pattern(new RegExp("^[a-zA-Z0-9]{4,30}$")),
   confirm: Joi.ref("password"),
-  email: Joi.string().email({ minDomainSegments: 2, tlds: { allow: ["com", "net"] } }),
+  email: Joi.string().email({
+    minDomainSegments: 2,
+    tlds: { allow: ["com", "net"] },
+  }),
   phoneNum: Joi.number().integer().min(11),
   birthday: Joi.number().integer().min(1900).max(2015),
 });
@@ -16,7 +19,8 @@ class MembersController {
 
   SignupMember = async (req, res, next) => {
     try {
-      const { id, password, confirm, name, email, phoneNum, birthday } = req.body;
+      const { id, password, confirm, name, email, phoneNum, birthday } =
+        req.body;
       await schema.validateAsync(req.body);
       await this.membersService.createMember(
         id,
@@ -36,8 +40,13 @@ class MembersController {
   LoginMember = async (req, res, next) => {
     try {
       const { id, password } = req.body;
-      const LoginMemberData = await this.membersService.findMember(id, password);
-      res.status(201).json({ data: LoginMemberData, message: "로그인 되었습니다." });
+      const LoginMemberData = await this.membersService.findMember(
+        id,
+        password
+      );
+      res
+        .status(201)
+        .json({ data: LoginMemberData, message: "로그인 되었습니다." });
     } catch (e) {
       res.status(401).json({ message: e.message });
     }
@@ -47,7 +56,9 @@ class MembersController {
     const { userId } = res.locals.user;
     const { id } = req.params;
     const MemberData = await this.membersService.GetMember(userId, id);
-    res.status(200).json({ data: MemberData, message: "정상적으로 조회되었습니다." });
+    res
+      .status(200)
+      .json({ data: MemberData, message: "정상적으로 조회되었습니다." });
   };
 
   updateMember = async (req, res, next) => {
@@ -61,7 +72,9 @@ class MembersController {
         password,
         confirm
       );
-      res.status(200).json({ data: UpdateMember, message: "수정을 완료하였습니다." });
+      res
+        .status(200)
+        .json({ data: UpdateMember, message: "수정을 완료하였습니다." });
     } catch (e) {
       res.status(403).json({ message: e.message });
     }
