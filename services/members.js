@@ -47,16 +47,20 @@ class MembersService {
   };
 
   updateMember = async (userId, name, password, email, phoneNum, birthday) => {
-    if (name === undefined) {
-      await this.membersRepository.changePassword(userId);
-      return;
-    }
+    // if (name === undefined) {
+    //   await this.membersRepository.changePassword(userId);
+    //   return;
+    // }
     const existsEmail = await this.membersRepository.findMember(email);
     if (existsEmail) {
       throw { message: "이메일이 이미 존재합니다" };
     }
-    UpdateMember = await this.membersRepository.updateMember(userId, name, password, email, phoneNum, birthday);
-    return UpdateMember;
+    const salt = await bcrypt.genSalt(10);
+    const bryptedPW = bcrypt.hashSync(password, salt);
+    password = bryptedPW;
+    await this.membersRepository.updateMember(userId, name, password, email, phoneNum, birthday);
+    const lookUpdate = await this.membersRepository.lookUpdateMember(userId);
+    return lookUpdate;
   };
 
   deleteMember = async (userId) => {

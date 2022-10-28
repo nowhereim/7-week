@@ -43,10 +43,15 @@ class MembersController {
   };
 
   GetMember = async (req, res, next) => {
+  try{
     const { userId } = res.locals.user;
     const { id } = req.params;
     const MemberData = await this.membersService.GetMember( userId, id );
     res.status(201).json( { data: MemberData , message:"정상적으로 조회되었습니다."} );
+  } catch (err) {
+    res.status(401).json({ errormessage: err });
+  }
+    
   };
 
   updateMember = async (req, res, next) => {
@@ -54,8 +59,8 @@ class MembersController {
       const { userId } = res.locals.user;
       const { name, password, confirm, email, phoneNum, birthday } = req.body;
       await schema.validateAsync(req.body);
-      const UpdateMember = await this.membersService.updateMember(userId, name, password, email, phoneNum, birthday);
-      res.status(201).json( { data: UpdateMember, message: "수정을 완료하였습니다." } );
+      const lookUpdate = await this.membersService.updateMember(userId, name, password, email, phoneNum, birthday);
+      res.status(201).json( { data: lookUpdate, message: "수정을 완료하였습니다." } );
     } catch (err) {
       res.status(401).json({ errormessage: err });
     }

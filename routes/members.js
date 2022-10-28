@@ -6,7 +6,7 @@ const membersController = new MembersController();
 
 router.post("/signup", membersController.SignupMember);
 router.post("/login", membersController.LoginMember);
-router.patch("/login", middleware, membersController.updateMember);
+router.put("/login", middleware, membersController.updateMember);
 router.delete("/login", middleware, membersController.deleteMember);
 router.get("/login/:id", middleware, membersController.GetMember);
 
