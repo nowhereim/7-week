@@ -30,8 +30,13 @@ class MembersController {
   LoginMember = async (req, res, next) => {
     try {
       const { id, password } = req.body;
-      const LoginMemberData = await this.membersService.findMember(id, password);
-      res.status(201).json({ data: LoginMemberData, message: "로그인 되었습니다." });
+      const LoginMemberData = await this.membersService.findMember(
+        id,
+        password
+      );
+      res
+        .status(201)
+        .json({ data: LoginMemberData, message: "로그인 되었습니다." });
     } catch (e) {
       res.status(401).json( { errormessage } );
     }
