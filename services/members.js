@@ -4,8 +4,8 @@ const bcrypt = require("bcrypt");
 require('dotenv').config();
 
 class MembersService {
-  constructor(){
-  this.membersRepository = new MembersRepository();
+  constructor() {
+    this.membersRepository = new MembersRepository();
   }
   createMember = async (id, password, confirm, name, email, phoneNum, address, detailaddress, birthday) => {
     const existsId = await this.membersRepository.findMember(id);
@@ -24,12 +24,12 @@ class MembersService {
   };
 
   GetMember = async (userId, id) => {
-    const GetMember = await this.membersRepository.GetMember(userId,id);
+    const GetMember = await this.membersRepository.GetMember(userId, id);
     return {
       userId: GetMember.userId,
       id: GetMember.id,
-    }
-  }
+    };
+  };
 
   findMember = async (id, password) => {
     const member = await this.membersRepository.findMember(id);
@@ -44,10 +44,10 @@ class MembersService {
   };
 
   updateMember = async (userId, nickname, password) => {
-    if(nickname === undefined) {
+    if (nickname === undefined) {
       await this.membersRepository.changePassword(userId);
-      return 
-    }      
+      return;
+    }
     const existsNickname = await this.membersRepository.findMember(nickname);
     if (existsNickname) {
       throw { message: "닉네임이 이미 존재합니다" };

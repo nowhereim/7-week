@@ -1,4 +1,4 @@
-const MembersService = require("../services/members");
+const MembersService = require("../servicess/members");
 const Joi = require("joi");
 
 const schema = Joi.object({
@@ -37,7 +37,7 @@ class MembersController {
     }
   };
 
-  GetMember = async(req,res,next) => {
+  GetMember = async (req, res, next) => {
     const { userId } = res.locals.user;
     const { id } = req.params;
     const MemberData = await this.membersService.GetMember( userId, id );
