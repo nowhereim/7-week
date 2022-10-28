@@ -24,21 +24,26 @@ class MembersRepository {
     return GetMember;
   };
 
+  lookUpdateMember = async (userId) => {
+    const lookUpdate = await Members.findOne({where: {userId}});
+    return lookUpdate;
+  };
+
   updateMember = async (userId, name, password, email, phoneNum, birthday) => {
-    const UpdateMember = await this.Members.update(
+    await this.Members.update(
       { name, password, email, phoneNum, birthday }, { where: { userId } }
     );
-    return UpdateMember;
+    return;
     
   };
 
-  changePassword = async (userId, password) => {
-    const changePassword = await this.Members.update(
-      { password },
-      { where: { userId } }
-    );
-    return changePassword
-  };
+  // changePassword = async (userId, password) => {
+  //   const changePassword = await this.Members.update(
+  //     { password },
+  //     { where: { userId } }
+  //   );
+  //   return changePassword
+  // };
 
   deleteMember = async (userId) => {
     await this.Members.destroy({ where: { userId } });
