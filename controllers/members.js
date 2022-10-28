@@ -1,4 +1,4 @@
-const MembersService = require("../servicess/members");
+const MembersService = require("../services/members");
 const Joi = require("joi");
 
 const schema = Joi.object({
@@ -22,8 +22,8 @@ class MembersController {
       await schema.validateAsync(req.body);
       await this.membersService.createMember(id, password, confirm, name, email, phoneNum, address, detailaddress, birthday);
       res.status(201).json( { message: "회원가입이 완료되었습니다." } );
-    } catch (e) {
-      res.status(409).json( { message: e.message } );
+    } catch (err) {
+      res.status(401).json({ errormessage: err });
     }
   };
 
@@ -37,8 +37,8 @@ class MembersController {
       res
         .status(201)
         .json({ data: LoginMemberData, message: "로그인 되었습니다." });
-    } catch (e) {
-      res.status(401).json( { errormessage } );
+    } catch (err) {
+      res.status(401).json({ errormessage: err });
     }
   };
 
@@ -52,12 +52,12 @@ class MembersController {
   updateMember = async (req, res, next) => {
     try {
       const { userId } = res.locals.user;
-      const { nickname, password, confirm } = req.body;
+      const { name, password, confirm, email, phoneNum, birthday } = req.body;
       await schema.validateAsync(req.body);
-      const UpdateMember = await this.membersService.updateMember(userId, nickname, password, confirm);
+      const UpdateMember = await this.membersService.updateMember(userId, name, password, email, phoneNum, birthday);
       res.status(201).json( { data: UpdateMember, message: "수정을 완료하였습니다." } );
     } catch (err) {
-      res.status(403).json( { errormessage } );
+      res.status(401).json({ errormessage: err });
     }
   };
 
@@ -67,7 +67,7 @@ class MembersController {
       await this.membersService.deleteMember(userId);
       res.status(201).json( { message: "삭제를 완료하였습니다." } );
     } catch (err) {
-      res.status(403).json( { errormessage } );
+      res.status(401).json({ errormessage: err });
     }
   };
 }

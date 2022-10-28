@@ -6,7 +6,6 @@ class MembersRepository {
   }
   createMember = async (id, password, confirm, name, email, phoneNum, address, detailaddress, birthday) => {
     const createMembersData = await this.Members.create({ id, password, confirm, name, email, phoneNum, address, detailaddress, birthday });
-
     return createMembersData;
   };
 
@@ -25,12 +24,12 @@ class MembersRepository {
     return GetMember;
   };
 
-  updateMember = async (userId, nickname, password) => {
-    const updateMember = await this.Members.update(
-      { nickname, password },
-      { where: { userId } }
+  updateMember = async (userId, name, password, email, phoneNum, birthday) => {
+    const UpdateMember = await this.Members.update(
+      { name, password, email, phoneNum, birthday }, { where: { userId } }
     );
-    return updateMember;
+    return UpdateMember;
+    
   };
 
   changePassword = async (userId, password) => {
