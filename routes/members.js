@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const middleware = require("../middlewares/auth-middleware");
-const MembersController = require("../controller/members");
+const MembersController = require("../controllers/members");
 const membersController = new MembersController();
 
 router.post("/signup", membersController.SignupMember);

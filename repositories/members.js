@@ -4,8 +4,8 @@ class MembersRepository {
   constructor() {
     this.Members = Members;
   }
-  createMember = async (id, password, confirm, name, email, phoneNum, birthday) => {
-    const createMembersData = await this.Members.create({ id, password, confirm, name, email, phoneNum, birthday });
+  createMember = async (id, password, confirm, name, email, phoneNum, address, detailaddress, birthday) => {
+    const createMembersData = await this.Members.create({ id, password, confirm, name, email, phoneNum, address, detailaddress, birthday });
 
     return createMembersData;
   };
