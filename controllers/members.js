@@ -1,4 +1,4 @@
-const MembersService = require("../services/members");
+const MembersService = require("../service/members");
 const Joi = require("joi");
 
 const schema = Joi.object({

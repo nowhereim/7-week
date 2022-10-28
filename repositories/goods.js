@@ -57,6 +57,80 @@ class GoodsRepository {
 
     return createGoods;
   };
+  // 모든 상품 보기
+  findAllGoods = async () => {
+    const findAllGoods = await Goods.findAll();
+
+    return findAllGoods;
+  };
+
+  //상품 수정
+  updateGoods = async (
+    goodsId,
+    category,
+    goodsImage,
+    goodsName,
+    goodsPrice,
+    goodsSale,
+    delivery,
+    seller,
+    deliveryType,
+    salesUnit,
+    volume,
+    origin,
+    allergy,
+    shelfLife,
+    notification,
+    exImage1,
+    exName1,
+    exContent1,
+    exImage2,
+    exName2,
+    exContent2,
+    ingredients,
+    process,
+    recommendation,
+    brand
+  ) => {
+    const updateGoods = await Goods.update(
+      {
+        category,
+        goodsImage,
+        goodsName,
+        goodsPrice,
+        goodsSale,
+        delivery,
+        seller,
+        deliveryType,
+        salesUnit,
+        volume,
+        origin,
+        allergy,
+        shelfLife,
+        notification,
+        exImage1,
+        exName1,
+        exContent1,
+        exImage2,
+        exName2,
+        exContent2,
+        ingredients,
+        process,
+        recommendation,
+        brand,
+      },
+      { where: { goodsId } }
+    );
+
+    return updateGoods;
+  };
+
+  //상품 삭제
+  deleteGoods = async (goodsId) => {
+    const deleteGoods = await Goods.destroy({ where: { goodsId } });
+
+    return deleteGoods;
+  };
 }
 
 module.exports = GoodsRepository;
