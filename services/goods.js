@@ -63,6 +63,70 @@ class GoodsService {
 
     return findAllGoods;
   };
+
+  updateGoods = async (
+    goodsId,
+    category,
+    goodsImage,
+    goodsName,
+    goodsPrice,
+    goodsSale,
+    delivery,
+    seller,
+    deliveryType,
+    salesUnit,
+    volume,
+    origin,
+    allergy,
+    shelfLife,
+    notification,
+    exImage1,
+    exName1,
+    exContent1,
+    exImage2,
+    exName2,
+    exContent2,
+    ingredients,
+    process,
+    recommendation,
+    brand
+  ) => {
+    const updateGoods = await this.goodsRepository.updateGoods(
+      goodsId,
+      category,
+      goodsImage,
+      goodsName,
+      goodsPrice,
+      goodsSale,
+      delivery,
+      seller,
+      deliveryType,
+      salesUnit,
+      volume,
+      origin,
+      allergy,
+      shelfLife,
+      notification,
+      exImage1,
+      exName1,
+      exContent1,
+      exImage2,
+      exName2,
+      exContent2,
+      ingredients,
+      process,
+      recommendation,
+      brand
+    );
+
+    return updateGoods;
+  };
+
+  deleteGoods = async (goodsId) => {
+    const deleteGoods = await this.goodsRepository.deleteGoods(goodsId);
+
+    return deleteGoods;
+  };
 }
 
 module.exports = GoodsService;
