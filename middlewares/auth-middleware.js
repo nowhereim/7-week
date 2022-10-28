@@ -18,7 +18,7 @@ module.exports = (req, res, next) => {
     const { userId } = jwt.verify(authToken, process.env.SECRET_KEY);
     Members.findByPk(userId).then((user) => {
       res.locals.user = user;
-      console.log(user);
+      console.log(user.id);
       next();
     });
   } catch (err) {

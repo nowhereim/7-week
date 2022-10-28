@@ -28,6 +28,9 @@ class MembersService {
     return {
       userId: GetMember.userId,
       id: GetMember.id,
+      name: GetMember.name,
+      email: GetMember.email,
+      phoneNum: GetMember.phoneNum
     };
   };
 
@@ -40,20 +43,20 @@ class MembersService {
     if (!validPassword) {
       throw { message: "아이디 또는 비밀번호가 일치하지 않습니다." };
     }
-    return { token: jwt.sign({ userId: member.userId, id:member.id, nickname:member.nickname}, process.env.SECRET_KEY) };
+    return { token: jwt.sign({ userId: member.userId, id:member.id }, process.env.SECRET_KEY) };
   };
 
-  updateMember = async (userId, nickname, password) => {
-    if (nickname === undefined) {
+  updateMember = async (userId, name, password, email, phoneNum, birthday) => {
+    if (name === undefined) {
       await this.membersRepository.changePassword(userId);
       return;
     }
-    const existsNickname = await this.membersRepository.findMember(nickname);
-    if (existsNickname) {
-      throw { message: "닉네임이 이미 존재합니다" };
+    const existsEmail = await this.membersRepository.findMember(email);
+    if (existsEmail) {
+      throw { message: "이메일이 이미 존재합니다" };
     }
-    await this.membersRepository.updateMember(userId, nickname, password);
-    return;
+    UpdateMember = await this.membersRepository.updateMember(userId, name, password, email, phoneNum, birthday);
+    return UpdateMember;
   };
 
   deleteMember = async (userId) => {
