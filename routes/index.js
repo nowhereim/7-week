@@ -7,4 +7,8 @@ const Goods = require("./goods");
 
 router.use("/goods", Goods);
 
+const membersRouter = require("./members");
+
+router.use("/members", membersRouter);
+
 module.exports = router;
