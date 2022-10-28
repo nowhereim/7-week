@@ -78,6 +78,85 @@ class GoodsController {
       res.status(400).json({ errormessage });
     }
   };
+  //상품 수정
+  updateGoods = async (req, res, next) => {
+    try {
+      const { goodsId } = req.params;
+      const {
+        category,
+        goodsImage,
+        goodsName,
+        goodsPrice,
+        goodsSale,
+        delivery,
+        seller,
+        deliveryType,
+        salesUnit,
+        volume,
+        origin,
+        allergy,
+        shelfLife,
+        notification,
+        exImage1,
+        exName1,
+        exContent1,
+        exImage2,
+        exName2,
+        exContent2,
+        ingredients,
+        process,
+        recommendation,
+        brand,
+      } = req.body;
+      const updateGoods = await this.goodsService.updateGoods(
+        goodsId,
+        category,
+        goodsImage,
+        goodsName,
+        goodsPrice,
+        goodsSale,
+        delivery,
+        seller,
+        deliveryType,
+        salesUnit,
+        volume,
+        origin,
+        allergy,
+        shelfLife,
+        notification,
+        exImage1,
+        exName1,
+        exContent1,
+        exImage2,
+        exName2,
+        exContent2,
+        ingredients,
+        process,
+        recommendation,
+        brand
+      );
+
+      res.status(200).json({ data: updateGoods });
+    } catch (err) {
+      const errormessage = `${req.method} ${req.originalUrl} : ${err.errormessage}`;
+      console.log(errormessage);
+      res.status(400).json({ errormessage });
+    }
+  };
+
+  deleteGoods = async (req, res, next) => {
+    try {
+      const { goodsId } = req.params;
+
+      const deleteGoods = await this.goodsService.deleteGoods(goodsId);
+
+      res.status(200).json({ data: deleteGoods });
+    } catch (err) {
+      const errormessage = `${req.method} ${req.originalUrl} : ${err.errormessage}`;
+      console.log(errormessage);
+      res.status(400).json({ errormessage });
+    }
+  };
 }
 
 module.exports = GoodsController;
