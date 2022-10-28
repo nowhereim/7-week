@@ -57,6 +57,12 @@ class GoodsRepository {
 
     return createGoods;
   };
+  // 모든 상품 보기
+  findAllGoods = async () => {
+    const findAllGoods = await Goods.findAll();
+
+    return findAllGoods;
+  };
 }
 
 module.exports = GoodsRepository;
