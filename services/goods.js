@@ -29,7 +29,7 @@ class GoodsService {
     recommendation,
     brand
   ) => {
-    const createGoods = await this.goodsrepository.createGoods(
+    const createGoods = await this.goodsRepository.createGoods(
       category,
       goodsImage,
       goodsName,
@@ -56,6 +56,12 @@ class GoodsService {
       brand
     );
     return createGoods;
+  };
+
+  findAllGoods = async () => {
+    const findAllGoods = await this.goodsRepository.findAllGoods();
+
+    return findAllGoods;
   };
 }
 

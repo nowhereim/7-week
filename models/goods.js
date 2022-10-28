@@ -13,6 +13,10 @@ module.exports = (sequelize, DataTypes) => {
   }
   Goods.init(
     {
+      goodsId: {
+        primaryKey: true,
+        type: DataTypes.INTEGER,
+      },
       category: {
         type: DataTypes.STRING,
       },
