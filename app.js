@@ -2,6 +2,9 @@ const express = require("express");
 const app = express();
 const routes = require("./routes");
 const cors = require("cors");
+require("dotenv").config();
+
+const port = process.env.EXPRESS_PORT;
 
 const corsOption = {
   origin: true,
@@ -12,6 +15,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors(corsOption));
 app.use(routes);
 
-app.listen(3000, () => {
-  console.log("Server is running on port 3000");
+app.listen(port, () => {
+  console.log("서버 온 앙~");
 });
