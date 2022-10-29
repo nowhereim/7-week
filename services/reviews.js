@@ -4,11 +4,19 @@ class ReviewsService {
   reviewsRepository = new ReviewsRepository();
 
   createReview = async (name, goodsId, review, reviewImage) => {
+    let today = new Date();
+
+    let year = today.getFullYear();
+    let month = ("0" + (today.getMonth() + 1)).slice(-2);
+    let day = ("0" + today.getDate()).slice(-2);
+
+    let dateString = year + "." + month + "." + day;
     const createReview = await this.reviewsRepository.createReview(
       name,
       goodsId,
       review,
-      reviewImage
+      reviewImage,
+      dateString
     );
 
     return createReview;
@@ -33,7 +41,20 @@ class ReviewsService {
       throw { code: -2 };
     }
 
-    const updateReview = await this.reviewsRepository.updateReview(reviewId, review, reviewImage);
+    let today = new Date();
+
+    let year = today.getFullYear();
+    let month = ("0" + (today.getMonth() + 1)).slice(-2);
+    let day = ("0" + today.getDate()).slice(-2);
+
+    let dateString = year + "." + month + "." + day;
+
+    const updateReview = await this.reviewsRepository.updateReview(
+      reviewId,
+      review,
+      reviewImage,
+      dateString
+    );
 
     return updateReview;
   };
