@@ -5,6 +5,7 @@ const goodsController = new GoodsController();
 
 router.post("/", goodsController.postGoods);
 router.get("/", goodsController.findAllGoods);
+router.get("/:goodsId", goodsController.findGoods);
 router.patch("/:goodsId", goodsController.updateGoods);
 router.delete("/:goodsId", goodsController.deleteGoods);
 

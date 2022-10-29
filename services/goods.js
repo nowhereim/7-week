@@ -2,6 +2,7 @@ const GoodsRepository = require("../repositories/goods");
 
 class GoodsService {
   goodsRepository = new GoodsRepository();
+
   // 상품 생성
   createGoods = async (
     category,
@@ -58,12 +59,22 @@ class GoodsService {
     return createGoods;
   };
 
+  //모든 상품 보기
   findAllGoods = async () => {
     const findAllGoods = await this.goodsRepository.findAllGoods();
 
     return findAllGoods;
   };
 
+  //특정 상품 보기
+  findGoods = async (goodsId) => {
+    const findGoods = await this.goodsRepository.findGoods(goodsId);
+    if (!findGoods) throw { code: -1 };
+
+    return findGoods;
+  };
+
+  //상품 수정
   updateGoods = async (
     goodsId,
     category,
@@ -118,12 +129,15 @@ class GoodsService {
       recommendation,
       brand
     );
+    if (!updateGoods) throw { code: -1 };
 
     return updateGoods;
   };
 
+  //상품 삭제
   deleteGoods = async (goodsId) => {
     const deleteGoods = await this.goodsRepository.deleteGoods(goodsId);
+    if (!deleteGoods) throw { code: -1 };
 
     return deleteGoods;
   };
