@@ -2,6 +2,7 @@ const GoodsService = require("../services/goods");
 
 class GoodsController {
   goodsService = new GoodsService();
+
   //상품등록
   postGoods = async (req, res, next) => {
     try {
@@ -66,6 +67,7 @@ class GoodsController {
       res.status(400).json({ errormessage });
     }
   };
+
   //모든 상품 보기
   findAllGoods = async (req, res, next) => {
     try {
@@ -78,6 +80,25 @@ class GoodsController {
       res.status(400).json({ errormessage });
     }
   };
+
+  //특정 상품 보기
+  findGoods = async (req, res, next) => {
+    try {
+      const { goodsId } = req.params;
+      const findGoods = await this.goodsService.findGoods(goodsId);
+
+      res.status(200).json({ data: findGoods });
+    } catch (err) {
+      if (err.code === -1) {
+        res.status(401).send({ errormessage: "없는 상품인디요?" });
+      } else {
+        const errormessage = `${req.method} ${req.originalUrl} : ${err.errormessage}`;
+        console.log(errormessage);
+        res.status(400).json({ errormessage });
+      }
+    }
+  };
+
   //상품 수정
   updateGoods = async (req, res, next) => {
     try {
@@ -138,12 +159,17 @@ class GoodsController {
 
       res.status(200).json({ data: updateGoods });
     } catch (err) {
-      const errormessage = `${req.method} ${req.originalUrl} : ${err.errormessage}`;
-      console.log(errormessage);
-      res.status(400).json({ errormessage });
+      if (err.code === -1) {
+        res.status(401).send({ errormessage: "없는 상품인디요?" });
+      } else {
+        const errormessage = `${req.method} ${req.originalUrl} : ${err.errormessage}`;
+        console.log(errormessage);
+        res.status(400).json({ errormessage });
+      }
     }
   };
 
+  //상품 삭제
   deleteGoods = async (req, res, next) => {
     try {
       const { goodsId } = req.params;
@@ -152,9 +178,13 @@ class GoodsController {
 
       res.status(200).json({ data: deleteGoods });
     } catch (err) {
-      const errormessage = `${req.method} ${req.originalUrl} : ${err.errormessage}`;
-      console.log(errormessage);
-      res.status(400).json({ errormessage });
+      if (err.code === -1) {
+        res.status(401).send({ errormessage: "없는 상품인디요?" });
+      } else {
+        const errormessage = `${req.method} ${req.originalUrl} : ${err.errormessage}`;
+        console.log(errormessage);
+        res.status(400).json({ errormessage });
+      }
     }
   };
 }

@@ -57,9 +57,17 @@ class GoodsRepository {
 
     return createGoods;
   };
-  // 모든 상품 보기
+
+  //모든 상품 보기
   findAllGoods = async () => {
     const findAllGoods = await Goods.findAll();
+
+    return findAllGoods;
+  };
+
+  //특정 상품 보기
+  findGoods = async (goodsId) => {
+    const findAllGoods = await Goods.findAll({ where: { goodsId } });
 
     return findAllGoods;
   };
