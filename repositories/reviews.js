@@ -10,16 +10,15 @@ class ReviewsRepository {
     return findUser;
   };
   //리뷰 작성
-  createReview = async (name, goodsId, review, reviewImage) => {
+  createReview = async (name, goodsId, review, reviewImage, date) => {
     const goodsName = await Goods.findOne({ where: { goodsId } });
-    console.log(name);
-    console.log(goodsName.goodsName);
     const createReview = await Reviews.create({
       goodsId,
       goodsName: goodsName.goodsName,
       name,
       review,
       reviewImage,
+      date,
     });
 
     return createReview;
@@ -39,8 +38,11 @@ class ReviewsRepository {
     return findAllImages;
   };
   //리뷰 수정
-  updateReview = async (reviewId, review, reviewImage) => {
-    const updateReview = await Reviews.update({ review, reviewImage }, { where: { reviewId } });
+  updateReview = async (reviewId, review, reviewImage, date) => {
+    const updateReview = await Reviews.update(
+      { review, reviewImage, date },
+      { where: { reviewId } }
+    );
 
     return updateReview;
   };
