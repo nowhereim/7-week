@@ -29,10 +29,7 @@
       "description": "문의API"
     }
   ],
-  "schemes": [
-    "http",
-    "https"
-  ],
+  "schemes": ["http", "https"],
   "securityDefinitions": {
     "apiKeyAuth": {
       "type": "apiKey",
@@ -41,22 +38,31 @@
       "description": "any description..."
     }
   },
-  "consumes": [
-    "application/json"
-  ],
-  "produces": [
-    "application/json"
-  ],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
   "paths": {
     "/cart/": {
       "get": {
         "tags": ["Cart"],
-        "description": "",
+        "description": "장바구니 전체 조회",
         "parameters": [
           {
             "name": "authorization",
             "in": "header",
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "type": "string",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "userId": {
+                  "example": "유저 아이디"
+                }
+              }
+            }
           }
         ],
         "responses": {
@@ -70,12 +76,37 @@
       },
       "post": {
         "tags": ["Cart"],
-        "description": "",
+        "description": "장바구니 추가",
         "parameters": [
           {
             "name": "authorization",
             "in": "header",
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "type": "string",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "userId": {
+                  "example": "유저 아이디"
+                },
+                "productId": {
+                  "example": "상품 아이디"
+                },
+                "quantity": {
+                  "example": "quantity"
+                },
+                "price": {
+                  "example": "가격"
+                },
+                "productName": {
+                  "example": "상품 이름"
+                }
+              }
+            }
           }
         ],
         "responses": {
@@ -89,12 +120,28 @@
       },
       "put": {
         "tags": ["Cart"],
-        "description": "",
+        "description": "장바구니 수정",
         "parameters": [
           {
             "name": "authorization",
             "in": "header",
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "type": "string",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "quantity": {
+                  "example": "quantity"
+                },
+                "cartId": {
+                  "example": "카트 아이디"
+                }
+              }
+            }
           }
         ],
         "responses": {
@@ -108,12 +155,25 @@
       },
       "delete": {
         "tags": ["Cart"],
-        "description": "",
+        "description": "장바구니 지정 삭제",
         "parameters": [
           {
             "name": "authorization",
             "in": "header",
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "type": "string",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "cartId": {
+                  "example": "카트 아이디"
+                }
+              }
+            }
           }
         ],
         "responses": {
@@ -129,12 +189,24 @@
     "/cart/all": {
       "delete": {
         "tags": ["Cart"],
-        "description": "",
+        "description": "장바구니 전체 삭제",
         "parameters": [
           {
             "name": "authorization",
             "in": "header",
             "type": "string"
+          },{
+            "name": "body",
+            "in": "body",
+            "type": "string",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "userId": {
+                  "example": "유저 아이디"
+                }
+              }
+            }
           }
         ],
         "responses": {
@@ -150,11 +222,87 @@
     "/goods/": {
       "post": {
         "description": "",
-        "parameters": [],
+        "tags": ["Goods"],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "type": "string",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "category": {
+                  "example": "과일"
+                },
+                "goodsImage": {
+                  "example": "https://product-image.kurly.com/cdn-cgi/image/width=676,format=auto/product/image/5541028a-2e9d-4487-87dc-caa9fbc06d7f.jpg"
+                },
+                "goodsName": {
+                  "example": "무농약 제주 청레몬 450g (3~5입)"
+                },
+                "goodsPrice": {
+                  "example": "8500"
+                },
+                "goodsSale": {
+                  "example": "10"
+                },
+                "delivery": {
+                  "example": "샛별배송"
+                },
+                "seller": {
+                  "example": "컬리"
+                },
+                "deliveryType": {
+                  "example": "상품이미지"
+                },
+                "salesUnit": {
+                  "example": "1팩"
+                },
+                "volume": {
+                  "example": "450g내외"
+                },
+                "origin": {
+                  "example": "국산"
+                },
+                "allergy": {
+                  "example": "알레르기정보"
+                },
+                "shelfLife": {
+                  "example": "해당상품은 신선식품으로 별도의 유통기한이 없으니 가급적 빨리 먹어"
+                },
+                "notification": {
+                  "example": "식품 특성상 중량은 3% 내외의 차이가 발생할 수 있습니다."
+                },
+                "exImage": {
+                  "example": "exImage"
+                },
+                "exName": {
+                  "example": "exName"
+                },
+                "exContent": {
+                  "example": "exContent"
+                },
+                "ingredients": {
+                  "example": "ingredients"
+                },
+                "process": {
+                  "example": "process"
+                },
+                "recommendation": {
+                  "example": "recommendation"
+                },
+                "brand": {
+                  "example": "brand"
+                }
+              }
+            }
+          }
+        ],
         "responses": {}
       },
       "get": {
         "description": "",
+        "tags": ["Goods"],
         "parameters": [],
         "responses": {}
       }
@@ -162,17 +310,114 @@
     "/goods/{goodsId}": {
       "get": {
         "description": "",
-        "parameters": [],
+        "tags": ["Goods"],
+        "parameters": [
+          {
+            "name": "goodsId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
         "responses": {}
       },
       "patch": {
         "description": "",
-        "parameters": [],
+        "tags": ["Goods"],
+        "parameters": [
+          {
+            "name": "goodsId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "type": "string",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "category": {
+                  "example": "과일"
+                },
+                "goodsImage": {
+                  "example": "https://product-image.kurly.com/cdn-cgi/image/width=676,format=auto/product/image/5541028a-2e9d-4487-87dc-caa9fbc06d7f.jpg"
+                },
+                "goodsName": {
+                  "example": "무농약 제주 청레몬 450g (3~5입)"
+                },
+                "goodsPrice": {
+                  "example": "8500"
+                },
+                "goodsSale": {
+                  "example": "10"
+                },
+                "delivery": {
+                  "example": "샛별배송"
+                },
+                "seller": {
+                  "example": "컬리"
+                },
+                "deliveryType": {
+                  "example": "상품이미지"
+                },
+                "salesUnit": {
+                  "example": "1팩"
+                },
+                "volume": {
+                  "example": "450g내외"
+                },
+                "origin": {
+                  "example": "국산"
+                },
+                "allergy": {
+                  "example": "알레르기정보"
+                },
+                "shelfLife": {
+                  "example": "해당상품은 신선식품으로 별도의 유통기한이 없으니 가급적 빨리 먹어"
+                },
+                "notification": {
+                  "example": "식품 특성상 중량은 3% 내외의 차이가 발생할 수 있습니다."
+                },
+                "exImage": {
+                  "example": "exImage"
+                },
+                "exName": {
+                  "example": "exName"
+                },
+                "exContent": {
+                  "example": "exContent"
+                },
+                "ingredients": {
+                  "example": "ingredients"
+                },
+                "process": {
+                  "example": "process"
+                },
+                "recommendation": {
+                  "example": "recommendation"
+                },
+                "brand": {
+                  "example": "brand"
+                }
+              }
+            }
+          }
+        ],
         "responses": {}
       },
       "delete": {
         "description": "",
-        "parameters": [],
+        "tags": ["Goods"],
+        "parameters": [
+          {
+            "name": "goodsId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
         "responses": {}
       }
     },
@@ -180,7 +425,45 @@
       "post": {
         "tags": ["Members"],
         "description": "회원가입",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "type": "string",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "example": "아이디"
+                },
+                "password": {
+                  "example": "비밀번호"
+                },
+                "confirm": {
+                  "example": "비밀번호 확인"
+                },
+                "name": {
+                  "example": "이름"
+                },
+                "email": {
+                  "example": "이메일"
+                },
+                "phoneNum": {
+                  "example": "휴대폰 번호"
+                },
+                "address": {
+                  "example": "주소"
+                },
+                "detailaddress": {
+                  "example": "상세 주소"
+                },
+                "birthday": {
+                  "example": "생년월일"
+                }
+              }
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -195,7 +478,24 @@
       "post": {
         "tags": ["Members"],
         "description": "로그인",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "type": "string",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "example": "아이디"
+                },
+                "password": {
+                  "example": "비밀번호"
+                }
+              }
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -213,6 +513,34 @@
             "name": "authorization",
             "in": "header",
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "type": "string",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "example": "이름"
+                },
+                "password": {
+                  "example": "비밀번호"
+                },
+                "confirm": {
+                  "example": "비밀번호 확인"
+                },
+                "email": {
+                  "example": "이메일"
+                },
+                "phoneNum": {
+                  "example": "휴대폰 번호"
+                },
+                "birthday": {
+                  "example": "생년월일"
+                }
+              }
+            }
           }
         ],
         "responses": {
@@ -273,65 +601,306 @@
     },
     "/question/": {
       "get": {
+        "tags": ["QnA"],
         "description": "",
-        "parameters": [],
-        "responses": {}
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "productId",
+            "in": "body",
+            "type": "string",
+            "required": true,
+            "properties": {
+              "productId": {
+                "example": "1",
+                "type": "integer"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
       },
       "post": {
+        "tags": ["QnA"],
         "description": "",
-        "parameters": [],
-        "responses": {}
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "userId, productId, secret, title, content",
+            "in": "body",
+            "type": "string",
+            "properties": {
+              "userId": { "example": "1", "type": "integer" },
+              "productId": { "example": "1", "type": "integer" },
+              "secret": { "example": "1", "type": "integer" },
+              "title": { "example": "질문이있어요", "type": "string" },
+              "content": { "example": "정말 맛없네요.", "type": "string" }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
       },
       "put": {
+        "tags": ["QnA"],
         "description": "",
-        "parameters": [],
-        "responses": {}
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "title, content, questionId, secret, userId",
+            "in": "body",
+            "type": "string",
+            "properties": {
+              "title": {
+                "example": "질문이있어요",
+                "type": "string"
+              },
+              "content": {
+                "example": "너무맛이없어요",
+                "type": "string"
+              },
+              "questionId": {
+                "example": "1",
+                "type": "integer"
+              },
+              "secret": {
+                "example": "1",
+                "type": "integer"
+              },
+              "userId": {
+                "example": "1",
+                "type": "integer"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
       },
       "delete": {
+        "tags": ["QnA"],
         "description": "",
-        "parameters": [],
-        "responses": {}
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "userId, questionId",
+            "in": "body",
+            "type": "integer",
+            "properties": {
+              "userId": { "example": "1", "type": "integer" },
+              "questionId": { "example": "1", "type": "integer" }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
       }
     },
     "/question/{questionId}": {
       "get": {
+        "tags": ["QnA"],
         "description": "",
-        "parameters": [],
-        "responses": {}
+        "parameters": [
+          {
+            "name": "questionId",
+            "in": "params",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
       }
     },
     "/answer/": {
       "post": {
+        "tags": ["QnA"],
         "description": "",
-        "parameters": [],
-        "responses": {}
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "questionId, answer",
+            "in": "body",
+            "type": "string,integer",
+            "properties": {
+              "questionId": { "example": "1", "type": "integer" },
+              "answer": { "example": "어쩌라구요", "type": "string" }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
       },
       "put": {
+        "tags": ["QnA"],
         "description": "",
-        "parameters": [],
-        "responses": {}
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "questionId, answer, answerId",
+            "in": "body",
+            "type": "string,integer",
+            "properties": {
+              "questionId": { "example": "1", "type": "integer" },
+              "answer": { "example": "어쩌라구요", "type": "string" },
+              "answerId": { "example": "1", "type": "integer" }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
       },
       "delete": {
+        "tags": ["QnA"],
         "description": "",
-        "parameters": [],
-        "responses": {}
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "questionId, answerId",
+            "in": "body",
+            "type": "integer",
+            "properties": {
+              "questionId": { "example": "1", "type": "integer" },
+              "answerId": { "example": "1", "type": "integer" }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
       },
       "get": {
+        "tags": ["QnA"],
         "description": "",
-        "parameters": [],
-        "responses": {}
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
       }
     },
     "/answer/{answerId}": {
       "get": {
+        "tags": ["QnA"],
         "description": "",
-        "parameters": [],
-        "responses": {}
+        "parameters": [
+          {
+            "name": "answerId",
+            "in": "params",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
       }
     },
     "/reviews/{goodsId}": {
       "post": {
         "description": "",
+        "tags": ["Reviews"],
         "parameters": [
           {
             "name": "goodsId",
@@ -343,6 +912,22 @@
             "name": "authorization",
             "in": "header",
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "type": "string",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "review": {
+                  "example": "리뷰내용"
+                },
+                "reviewImage": {
+                  "example": "상품이미지"
+                }
+              }
+            }
           }
         ],
         "responses": {
@@ -356,20 +941,37 @@
       },
       "get": {
         "description": "",
-        "parameters": [],
+        "tags": ["Reviews"],
+        "parameters": [
+          {
+            "name": "goodsId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
         "responses": {}
       }
     },
     "/reviews/reviewImages/{goodsId}": {
       "get": {
         "description": "",
-        "parameters": [],
+        "tags": ["Reviews"],
+        "parameters": [
+          {
+            "name": "goodsId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
         "responses": {}
       }
     },
     "/reviews/{reviewId}": {
       "patch": {
         "description": "",
+        "tags": ["Reviews"],
         "parameters": [
           {
             "name": "reviewId",
@@ -381,6 +983,22 @@
             "name": "authorization",
             "in": "header",
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "type": "string",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "review": {
+                  "example": "리뷰내용"
+                },
+                "reviewImage": {
+                  "example": "상품이미지"
+                }
+              }
+            }
           }
         ],
         "responses": {
@@ -394,6 +1012,7 @@
       },
       "delete": {
         "description": "",
+        "tags": ["Reviews"],
         "parameters": [
           {
             "name": "reviewId",
@@ -416,63 +1035,6 @@
           }
         }
       }
-    }
-  },
-  "definitions": {
-    "signup": {
-      "type": "object",
-      "properties": {
-        "father": {
-          "type": "string",
-          "example": "Simon Doe"
-        },
-        "mother": {
-          "type": "string",
-          "example": "Marie Doe"
-        }
-      }
-    },
-    "User": {
-      "type": "object",
-      "properties": {
-        "userId": {
-          "type": "number",
-          "example": 1
-        },
-        "nickname": {
-          "type": "string",
-          "example": "aaa"
-        },
-        "password": {
-          "type": "string",
-          "example": "1111"
-        }
-      },
-      "required": [
-        "nickname",
-        "password"
-      ]
-    },
-    "AddUser": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string",
-          "example": "Jhon Doe"
-        },
-        "age": {
-          "type": "number",
-          "example": 29
-        },
-        "about": {
-          "type": "string",
-          "example": ""
-        }
-      },
-      "required": [
-        "name",
-        "age"
-      ]
     }
   }
 }
