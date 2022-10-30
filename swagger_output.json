@@ -365,6 +365,7 @@
             "required": true,
             "properties": {
               "productId": {
+                "example": "1",
                 "type": "integer"
               }
             }
@@ -393,11 +394,11 @@
             "in": "body",
             "type": "string",
             "properties": {
-              "userId": { "type": "integer" },
-              "productId": { "type": "integer" },
-              "secret": { "type": "integer" },
-              "title": { "type": "string" },
-              "content": { "type": "string" }
+              "userId": { "example": "1", "type": "integer" },
+              "productId": { "example": "1", "type": "integer" },
+              "secret": { "example": "1", "type": "integer" },
+              "title": { "example": "질문이있어요", "type": "string" },
+              "content": { "example": "정말 맛없네요.", "type": "string" }
             }
           }
         ],
@@ -425,18 +426,23 @@
             "type": "string",
             "properties": {
               "title": {
+                "example": "질문이있어요",
                 "type": "string"
               },
               "content": {
+                "example": "너무맛이없어요",
                 "type": "string"
               },
               "questionId": {
+                "example": "1",
                 "type": "integer"
               },
               "secret": {
+                "example": "1",
                 "type": "integer"
               },
               "userId": {
+                "example": "1",
                 "type": "integer"
               }
             }
@@ -465,8 +471,8 @@
             "in": "body",
             "type": "integer",
             "properties": {
-              "userId": { "type": "integer" },
-              "questionId": { "type": "integer" }
+              "userId": { "example": "1", "type": "integer" },
+              "questionId": { "example": "1", "type": "integer" }
             }
           }
         ],
@@ -522,8 +528,8 @@
             "in": "body",
             "type": "string,integer",
             "properties": {
-              "questionId": { "type": "integer" },
-              "answer": { "type": "string" }
+              "questionId": { "example": "1", "type": "integer" },
+              "answer": { "example": "어쩌라구요", "type": "string" }
             }
           }
         ],
@@ -550,9 +556,9 @@
             "in": "body",
             "type": "string,integer",
             "properties": {
-              "questionId": { "type": "integer" },
-              "answer": { "type": "string" },
-              "answerId": { "type": "integer" }
+              "questionId": { "example": "1", "type": "integer" },
+              "answer": { "example": "어쩌라구요", "type": "string" },
+              "answerId": { "example": "1", "type": "integer" }
             }
           }
         ],
@@ -579,8 +585,8 @@
             "in": "body",
             "type": "integer",
             "properties": {
-              "questionId": { "type": "integer" },
-              "answerId": { "type": "integer" }
+              "questionId": { "example": "1", "type": "integer" },
+              "answerId": { "example": "1", "type": "integer" }
             }
           }
         ],
