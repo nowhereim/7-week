@@ -409,7 +409,6 @@
     "/reviews/{goodsId}": {
       "post": {
         "description": "",
-        "tags": ["리뷰API"],
         "parameters": [
           {
             "name": "goodsId",
@@ -421,22 +420,6 @@
             "name": "authorization",
             "in": "header",
             "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "type": "string",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "review": {
-                  "example": "리뷰내용"
-                },
-                "reviewImage": {
-                  "example": "상품이미지"
-                }
-              }
-            }
           }
         ],
         "responses": {
@@ -446,6 +429,83 @@
           "401": {
             "description": "Unauthorized"
           }
+        }
+      },
+      "get": {
+        "description": "",
+        "parameters": [],
+        "responses": {}
+      }
+    },
+    "/reviews/reviewImages/{goodsId}": {
+      "get": {
+        "description": "",
+        "parameters": [],
+        "responses": {}
+      }
+    },
+    "/reviews/{reviewId}": {
+      "patch": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "reviewId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      },
+      "delete": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "reviewId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "signup": {
+      "type": "object",
+      "properties": {
+        "father": {
+          "type": "string",
+          "example": "Simon Doe"
+        },
+        "mother": {
+          "type": "string",
+          "example": "Marie Doe"
         }
       },
       "get": {
