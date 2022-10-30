@@ -164,11 +164,7 @@ class Questioncontroller {
   // Q&A 답변 조회
   getAnswer = async (req, res, next) => {
     try {
-      const questionId = req.body.questionId;
-      if (questionId === undefined) {
-        throw "리퀘스트 정보에 필요한 값이 없습니다.";
-      }
-      const readanswer = await this.questionservice.getAnswer(questionId);
+      const readanswer = await this.questionservice.getAnswer();
       res.status(200).json({ data: readanswer });
     } catch (err) {
       res.status(400).json({ errormessage: err });

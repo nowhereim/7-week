@@ -350,60 +350,294 @@
     },
     "/question/": {
       "get": {
+        "tags": ["QnA"],
         "description": "",
-        "parameters": [],
-        "responses": {}
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "productId",
+            "in": "body",
+            "type": "string",
+            "required": true,
+            "properties": {
+              "productId": {
+                "type": "integer"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
       },
       "post": {
+        "tags": ["QnA"],
         "description": "",
-        "parameters": [],
-        "responses": {}
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "userId, productId, secret, title, content",
+            "in": "body",
+            "type": "string",
+            "properties": {
+              "userId": { "type": "integer" },
+              "productId": { "type": "integer" },
+              "secret": { "type": "integer" },
+              "title": { "type": "string" },
+              "content": { "type": "string" }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
       },
       "put": {
+        "tags": ["QnA"],
         "description": "",
-        "parameters": [],
-        "responses": {}
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "title, content, questionId, secret, userId",
+            "in": "body",
+            "type": "string",
+            "properties": {
+              "title": {
+                "type": "string"
+              },
+              "content": {
+                "type": "string"
+              },
+              "questionId": {
+                "type": "integer"
+              },
+              "secret": {
+                "type": "integer"
+              },
+              "userId": {
+                "type": "integer"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
       },
       "delete": {
+        "tags": ["QnA"],
         "description": "",
-        "parameters": [],
-        "responses": {}
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "userId, questionId",
+            "in": "body",
+            "type": "integer",
+            "properties": {
+              "userId": { "type": "integer" },
+              "questionId": { "type": "integer" }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
       }
     },
     "/question/{questionId}": {
       "get": {
+        "tags": ["QnA"],
         "description": "",
-        "parameters": [],
-        "responses": {}
+        "parameters": [
+          {
+            "name": "questionId",
+            "in": "params",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
       }
     },
     "/answer/": {
       "post": {
+        "tags": ["QnA"],
         "description": "",
-        "parameters": [],
-        "responses": {}
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "questionId, answer",
+            "in": "body",
+            "type": "string,integer",
+            "properties": {
+              "questionId": { "type": "integer" },
+              "answer": { "type": "string" }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
       },
       "put": {
+        "tags": ["QnA"],
         "description": "",
-        "parameters": [],
-        "responses": {}
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "questionId, answer, answerId",
+            "in": "body",
+            "type": "string,integer",
+            "properties": {
+              "questionId": { "type": "integer" },
+              "answer": { "type": "string" },
+              "answerId": { "type": "integer" }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
       },
       "delete": {
+        "tags": ["QnA"],
         "description": "",
-        "parameters": [],
-        "responses": {}
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "questionId, answerId",
+            "in": "body",
+            "type": "integer",
+            "properties": {
+              "questionId": { "type": "integer" },
+              "answerId": { "type": "integer" }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
       },
       "get": {
+        "tags": ["QnA"],
         "description": "",
-        "parameters": [],
-        "responses": {}
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
       }
     },
     "/answer/{answerId}": {
       "get": {
+        "tags": ["QnA"],
         "description": "",
-        "parameters": [],
-        "responses": {}
+        "parameters": [
+          {
+            "name": "answerId",
+            "in": "params",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
       }
     },
     "/reviews/{goodsId}": {
