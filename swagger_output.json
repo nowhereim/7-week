@@ -73,6 +73,7 @@
     "/goods/": {
       "post": {
         "description": "",
+        "tags": ["Goods"],
         "parameters": [
           {
             "name": "body",
@@ -148,19 +149,19 @@
             }
           }
         ],
-        "tags": ["상품API"],
         "responses": {}
       },
       "get": {
         "description": "",
+        "tags": ["Goods"],
         "parameters": [],
-        "tags": ["상품API"],
         "responses": {}
       }
     },
     "/goods/{goodsId}": {
       "get": {
         "description": "",
+        "tags": ["Goods"],
         "parameters": [
           {
             "name": "goodsId",
@@ -169,11 +170,11 @@
             "type": "string"
           }
         ],
-        "tags": ["상품API"],
         "responses": {}
       },
       "patch": {
         "description": "",
+        "tags": ["Goods"],
         "parameters": [
           {
             "name": "goodsId",
@@ -255,11 +256,11 @@
             }
           }
         ],
-        "tags": ["상품API"],
         "responses": {}
       },
       "delete": {
         "description": "",
+        "tags": ["Goods"],
         "parameters": [
           {
             "name": "goodsId",
@@ -268,7 +269,6 @@
             "type": "string"
           }
         ],
-        "tags": ["상품API"],
         "responses": {}
       }
     },
@@ -643,6 +643,7 @@
     "/reviews/{goodsId}": {
       "post": {
         "description": "",
+        "tags": ["Reviews"],
         "parameters": [
           {
             "name": "goodsId",
@@ -654,6 +655,22 @@
             "name": "authorization",
             "in": "header",
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "type": "string",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "review": {
+                  "example": "리뷰내용"
+                },
+                "reviewImage": {
+                  "example": "상품이미지"
+                }
+              }
+            }
           }
         ],
         "responses": {
@@ -667,6 +684,7 @@
       },
       "get": {
         "description": "",
+        "tags": ["Reviews"],
         "parameters": [],
         "responses": {}
       }
@@ -674,76 +692,7 @@
     "/reviews/reviewImages/{goodsId}": {
       "get": {
         "description": "",
-        "parameters": [],
-        "responses": {}
-      }
-    },
-    "/reviews/{reviewId}": {
-      "patch": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "reviewId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      },
-      "delete": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "reviewId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      }
-    }
-  },
-  "definitions": {
-    "signup": {
-      "type": "object",
-      "properties": {
-        "father": {
-          "type": "string",
-          "example": "Simon Doe"
-        },
-        "mother": {
-          "type": "string",
-          "example": "Marie Doe"
-        }
-      },
-      "get": {
-        "description": "",
+        "tags": ["Reviews"],
         "parameters": [
           {
             "name": "goodsId",
@@ -752,29 +701,13 @@
             "type": "string"
           }
         ],
-        "tags": ["리뷰API"],
-        "responses": {}
-      }
-    },
-    "/reviews/reviewImages/{goodsId}": {
-      "get": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "goodsId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "tags": ["리뷰API"],
         "responses": {}
       }
     },
     "/reviews/{reviewId}": {
       "patch": {
         "description": "",
-        "tags": ["리뷰API"],
+        "tags": ["Reviews"],
         "parameters": [
           {
             "name": "reviewId",
@@ -815,7 +748,7 @@
       },
       "delete": {
         "description": "",
-        "tags": ["리뷰API"],
+        "tags": ["Reviews"],
         "parameters": [
           {
             "name": "reviewId",
