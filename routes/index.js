@@ -9,5 +9,7 @@ router.use("/cart", Cart);
 router.use("/reviews", Reviews);
 router.use("/goods", Goods);
 router.use("/members", membersRouter);
+router.use("/question", qeustion);
+router.use("/answer", answer);
 
 module.exports = router;
