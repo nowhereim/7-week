@@ -1,14 +1,15 @@
 const express = require("express");
 const router = express.Router();
 const Cart = require("./cart");
-router.use("/cart", Cart);
-
 const Goods = require("./goods");
-
-router.use("/goods", Goods);
-
+const qeustion = require("./questions");
+const answer = require("./answers");
 const membersRouter = require("./members");
 
+router.use("/cart", Cart);
+router.use("/goods", Goods);
 router.use("/members", membersRouter);
+router.use("/question", qeustion);
+router.use("/answer", answer);
 
 module.exports = router;
