@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Cart = require("./cart");
 const Goods = require("./goods");
+const Reviews = require("./reviews");
 const qeustion = require("./questions");
 const answer = require("./answers");
 const membersRouter = require("./members");
