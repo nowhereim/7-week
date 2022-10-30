@@ -43,31 +43,180 @@
   "paths": {
     "/cart/": {
       "get": {
-        "description": "",
-        "parameters": [],
-        "responses": {}
+        "tags": ["Cart"],
+        "description": "장바구니 전체 조회",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "type": "string",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "userId": {
+                  "example": "유저 아이디"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
       },
       "post": {
-        "description": "",
-        "parameters": [],
-        "responses": {}
+        "tags": ["Cart"],
+        "description": "장바구니 추가",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "type": "string",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "userId": {
+                  "example": "유저 아이디"
+                },
+                "productId": {
+                  "example": "상품 아이디"
+                },
+                "quantity": {
+                  "example": "quantity"
+                },
+                "price": {
+                  "example": "가격"
+                },
+                "productName": {
+                  "example": "상품 이름"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
       },
       "put": {
-        "description": "",
-        "parameters": [],
-        "responses": {}
+        "tags": ["Cart"],
+        "description": "장바구니 수정",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "type": "string",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "quantity": {
+                  "example": "quantity"
+                },
+                "cartId": {
+                  "example": "카트 아이디"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
       },
       "delete": {
-        "description": "",
-        "parameters": [],
-        "responses": {}
+        "tags": ["Cart"],
+        "description": "장바구니 지정 삭제",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "type": "string",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "cartId": {
+                  "example": "카트 아이디"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
       }
     },
     "/cart/all": {
       "delete": {
-        "description": "",
-        "parameters": [],
-        "responses": {}
+        "tags": ["Cart"],
+        "description": "장바구니 전체 삭제",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },{
+            "name": "body",
+            "in": "body",
+            "type": "string",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "userId": {
+                  "example": "유저 아이디"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
       }
     },
     "/goods/": {
@@ -274,24 +423,124 @@
     },
     "/members/signup": {
       "post": {
-        "description": "",
-        "parameters": [],
-        "responses": {}
+        "tags": ["Members"],
+        "description": "회원가입",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "type": "string",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "example": "아이디"
+                },
+                "password": {
+                  "example": "비밀번호"
+                },
+                "confirm": {
+                  "example": "비밀번호 확인"
+                },
+                "name": {
+                  "example": "이름"
+                },
+                "email": {
+                  "example": "이메일"
+                },
+                "phoneNum": {
+                  "example": "휴대폰 번호"
+                },
+                "address": {
+                  "example": "주소"
+                },
+                "detailaddress": {
+                  "example": "상세 주소"
+                },
+                "birthday": {
+                  "example": "생년월일"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
       }
     },
     "/members/login": {
       "post": {
-        "description": "",
-        "parameters": [],
-        "responses": {}
+        "tags": ["Members"],
+        "description": "로그인",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "type": "string",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "example": "아이디"
+                },
+                "password": {
+                  "example": "비밀번호"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
       },
       "put": {
-        "description": "",
+        "tags": ["Members"],
+        "description": "회원 정보 수정",
         "parameters": [
           {
             "name": "authorization",
             "in": "header",
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "type": "string",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "example": "이름"
+                },
+                "password": {
+                  "example": "비밀번호"
+                },
+                "confirm": {
+                  "example": "비밀번호 확인"
+                },
+                "email": {
+                  "example": "이메일"
+                },
+                "phoneNum": {
+                  "example": "휴대폰 번호"
+                },
+                "birthday": {
+                  "example": "생년월일"
+                }
+              }
+            }
           }
         ],
         "responses": {
@@ -304,7 +553,8 @@
         }
       },
       "delete": {
-        "description": "",
+        "tags": ["Members"],
+        "description": "회원 탈퇴",
         "parameters": [
           {
             "name": "authorization",
@@ -324,7 +574,8 @@
     },
     "/members/login/{id}": {
       "get": {
-        "description": "",
+        "tags": ["Members"],
+        "description": "마이 페이지",
         "parameters": [
           {
             "name": "id",
