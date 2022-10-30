@@ -1,27 +1,53 @@
 const jwt = require("jsonwebtoken");
 const { Members } = require("../models");
-require('dotenv').config();
+require("dotenv").config();
 
-module.exports = (req, res, next) => {
-  const { authorization } = req.headers;
-  const [authType, authToken] = (authorization || "").split(" ");
-  console.log(process.env.SECRET_KEY);
-  console.log(authType);
-  console.log(authToken);
-  console.log(jwt.verify(authToken, process.env.SECRET_KEY));
-  if (!authToken || authType !== "Bearer") {
+module.exports = async (req, res, next) => {
+
+  const accessToken = req.headers.authorization;
+  if (!accessToken) {
+    res.status(401).json({ errorMessage: "다시 로그인 해주세요." });
+  }
+
+  const [tokenType, tokenValue] = accessToken.split(" ");
+  if (tokenType !== "Bearer" || tokenValue === "null" || tokenValue === "undefined" || !tokenValue) {
     res.status(401).send({ errorMessage: "로그인 후 이용 가능한 기능입니다." });
-    return;
   }
 
   try {
-    const { userId } = jwt.verify(authToken, process.env.SECRET_KEY);
-    Members.findByPk(userId).then((user) => {
-      res.locals.user = user;
-      console.log(user.id);
-      next();
-    });
+    const myToken = verifyToken(tokenValue);
+    if (myToken == "jwt expired") {
+      // access token 만료
+      const userInfo = jwt.decode(tokenValue, process.env.SECRET_KEY);
+      console.log(userInfo);
+      const userId = userInfo.userId;
+      let refreshToken;
+      Members.findOne({ where: userId }).then((user) => {
+        refreshToken = user.refreshToken;
+        const myRefreshToken = verifyToken(refreshToken);
+        if (myRefreshToken == "jwt expired") {
+          res.send({ errorMessage: "로그인이 필요합니다." });
+        } else {
+          const myNewToken = jwt.sign({ userId: user.userId },process.env.SECRET_KEY,{expiresIn: "600s",});
+          res.send({ message: "new access token", myNewToken });
+        }
+      });
+    } else {
+      const { userId } = jwt.verify(tokenValue, process.env.SECRET_KEY);
+      Members.findOne({ where: userId }).then((user) => {
+        res.locals.user = user;
+        next();
+      });
+    }
   } catch (err) {
-    res.status(401).send({ errorMessage: "로그인이 필요합니다." });
+    res.send({ errorMessage: err + " : 로그인이 필요합니다." });
   }
 };
+
+function verifyToken(token) {
+  try {
+    return jwt.verify(token, process.env.SECRET_KEY);
+  } catch (error) {
+    return error.message;
+  }
+}
