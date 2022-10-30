@@ -2,11 +2,11 @@ const express = require("express");
 const router = express.Router();
 const Cart = require("./cart");
 const Goods = require("./goods");
-const qeustion = require("./questions");
-const answer = require("./answers");
+const Reviews = require("./reviews");
 const membersRouter = require("./members");
 
 router.use("/cart", Cart);
+router.use("/reviews", Reviews);
 router.use("/goods", Goods);
 router.use("/members", membersRouter);
 router.use("/question", qeustion);
