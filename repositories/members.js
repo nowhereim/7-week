@@ -4,20 +4,33 @@ class MembersRepository {
   constructor() {
     this.Members = Members;
   }
+  //회원가입
   createMember = async (id, password, confirm, name, email, phoneNum, address, detailaddress, birthday) => {
     const createMembersData = await this.Members.create({ id, password, confirm, name, email, phoneNum, address, detailaddress, birthday });
     return createMembersData;
   };
-
-  findMember = async (id) => {
-    const member = await this.Members.findOne({ where: { id } });
-    return member;
+  //user 정보가져오기
+  LoginMember = async (id) => {
+    const user = await this.Members.findOne({ where: { id } });
+    return user;
   };
-
+  //email중복검사
   findMemberbyEmail = async (email) => {
     const member = await this.Members.findOne({ where: { email } });
     return member;
   };
+  //Refresh토큰 업데이트
+  updateRefresh = async (refreshToken, user) => {
+    console.log(user.id);
+    await Members.update({ refreshToken }, { where: { userId: user.userId } });
+    console.log(user.refreshToken) 
+  };
+
+  // findRefrshToken = async (refreshToken, user) => {
+  //   const findRefrshToken = await Members.findOne({where: {refreshToken: user.refreshToken}});
+  //   console.log(findRefrshToken.refreshToken);
+  //   return findRefrshToken
+  // }
 
   GetMember = async (userId, id) => {
     const GetMember = await this.Members.findOne({ where: { userId, id } });
@@ -28,7 +41,7 @@ class MembersRepository {
     const lookUpdate = await Members.findOne({where: {userId}});
     return lookUpdate;
   };
-
+  //회원정보 수정
   updateMember = async (userId, name, password, email, phoneNum, birthday) => {
     await this.Members.update(
       { name, password, email, phoneNum, birthday }, { where: { userId } }
@@ -36,15 +49,7 @@ class MembersRepository {
     return;
     
   };
-
-  // changePassword = async (userId, password) => {
-  //   const changePassword = await this.Members.update(
-  //     { password },
-  //     { where: { userId } }
-  //   );
-  //   return changePassword
-  // };
-
+  //회원 탈퇴
   deleteMember = async (userId) => {
     await this.Members.destroy({ where: { userId } });
     return;
