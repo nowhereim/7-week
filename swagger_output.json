@@ -73,29 +73,202 @@
     "/goods/": {
       "post": {
         "description": "",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "type": "string",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "category": {
+                  "example": "과일"
+                },
+                "goodsImage": {
+                  "example": "https://product-image.kurly.com/cdn-cgi/image/width=676,format=auto/product/image/5541028a-2e9d-4487-87dc-caa9fbc06d7f.jpg"
+                },
+                "goodsName": {
+                  "example": "무농약 제주 청레몬 450g (3~5입)"
+                },
+                "goodsPrice": {
+                  "example": "8500"
+                },
+                "goodsSale": {
+                  "example": "10"
+                },
+                "delivery": {
+                  "example": "샛별배송"
+                },
+                "seller": {
+                  "example": "컬리"
+                },
+                "deliveryType": {
+                  "example": "상품이미지"
+                },
+                "salesUnit": {
+                  "example": "1팩"
+                },
+                "volume": {
+                  "example": "450g내외"
+                },
+                "origin": {
+                  "example": "국산"
+                },
+                "allergy": {
+                  "example": "알레르기정보"
+                },
+                "shelfLife": {
+                  "example": "해당상품은 신선식품으로 별도의 유통기한이 없으니 가급적 빨리 먹어"
+                },
+                "notification": {
+                  "example": "식품 특성상 중량은 3% 내외의 차이가 발생할 수 있습니다."
+                },
+                "exImage": {
+                  "example": "exImage"
+                },
+                "exName": {
+                  "example": "exName"
+                },
+                "exContent": {
+                  "example": "exContent"
+                },
+                "ingredients": {
+                  "example": "ingredients"
+                },
+                "process": {
+                  "example": "process"
+                },
+                "recommendation": {
+                  "example": "recommendation"
+                },
+                "brand": {
+                  "example": "brand"
+                }
+              }
+            }
+          }
+        ],
+        "tags": ["상품API"],
         "responses": {}
       },
       "get": {
         "description": "",
         "parameters": [],
+        "tags": ["상품API"],
         "responses": {}
       }
     },
     "/goods/{goodsId}": {
       "get": {
         "description": "",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "goodsId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": ["상품API"],
         "responses": {}
       },
       "patch": {
         "description": "",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "goodsId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "type": "string",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "category": {
+                  "example": "과일"
+                },
+                "goodsImage": {
+                  "example": "https://product-image.kurly.com/cdn-cgi/image/width=676,format=auto/product/image/5541028a-2e9d-4487-87dc-caa9fbc06d7f.jpg"
+                },
+                "goodsName": {
+                  "example": "무농약 제주 청레몬 450g (3~5입)"
+                },
+                "goodsPrice": {
+                  "example": "8500"
+                },
+                "goodsSale": {
+                  "example": "10"
+                },
+                "delivery": {
+                  "example": "샛별배송"
+                },
+                "seller": {
+                  "example": "컬리"
+                },
+                "deliveryType": {
+                  "example": "상품이미지"
+                },
+                "salesUnit": {
+                  "example": "1팩"
+                },
+                "volume": {
+                  "example": "450g내외"
+                },
+                "origin": {
+                  "example": "국산"
+                },
+                "allergy": {
+                  "example": "알레르기정보"
+                },
+                "shelfLife": {
+                  "example": "해당상품은 신선식품으로 별도의 유통기한이 없으니 가급적 빨리 먹어"
+                },
+                "notification": {
+                  "example": "식품 특성상 중량은 3% 내외의 차이가 발생할 수 있습니다."
+                },
+                "exImage": {
+                  "example": "exImage"
+                },
+                "exName": {
+                  "example": "exName"
+                },
+                "exContent": {
+                  "example": "exContent"
+                },
+                "ingredients": {
+                  "example": "ingredients"
+                },
+                "process": {
+                  "example": "process"
+                },
+                "recommendation": {
+                  "example": "recommendation"
+                },
+                "brand": {
+                  "example": "brand"
+                }
+              }
+            }
+          }
+        ],
+        "tags": ["상품API"],
         "responses": {}
       },
       "delete": {
         "description": "",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "goodsId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": ["상품API"],
         "responses": {}
       }
     },
@@ -568,43 +741,103 @@
           "type": "string",
           "example": "Marie Doe"
         }
+      },
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "goodsId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": ["리뷰API"],
+        "responses": {}
       }
     },
-    "User": {
-      "type": "object",
-      "properties": {
-        "userId": {
-          "type": "number",
-          "example": 1
-        },
-        "nickname": {
-          "type": "string",
-          "example": "aaa"
-        },
-        "password": {
-          "type": "string",
-          "example": "1111"
-        }
-      },
-      "required": ["nickname", "password"]
+    "/reviews/reviewImages/{goodsId}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "goodsId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": ["리뷰API"],
+        "responses": {}
+      }
     },
-    "AddUser": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string",
-          "example": "Jhon Doe"
-        },
-        "age": {
-          "type": "number",
-          "example": 29
-        },
-        "about": {
-          "type": "string",
-          "example": ""
+    "/reviews/{reviewId}": {
+      "patch": {
+        "description": "",
+        "tags": ["리뷰API"],
+        "parameters": [
+          {
+            "name": "reviewId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "type": "string",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "review": {
+                  "example": "리뷰내용"
+                },
+                "reviewImage": {
+                  "example": "상품이미지"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
         }
       },
-      "required": ["name", "age"]
+      "delete": {
+        "description": "",
+        "tags": ["리뷰API"],
+        "parameters": [
+          {
+            "name": "reviewId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
     }
   }
 }

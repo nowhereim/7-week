@@ -12,6 +12,6 @@ router.use("/goods", Goods);
 router.use("/members", membersRouter);
 router.use("/question", qeustion);
 router.use("/answer", answer);
-router.use("/reviews", Reviews);
+router.use("reviews", Reviews);
 
 module.exports = router;
