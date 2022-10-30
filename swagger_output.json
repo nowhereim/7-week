@@ -685,7 +685,14 @@
       "get": {
         "description": "",
         "tags": ["Reviews"],
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "goodsId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
         "responses": {}
       }
     },
