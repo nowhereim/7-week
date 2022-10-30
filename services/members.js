@@ -8,7 +8,7 @@ class MembersService {
     this.membersRepository = new MembersRepository();
   }
   createMember = async (id, password, confirm, name, email, phoneNum, address, detailaddress, birthday) => {
-    const existsId = await this.membersRepository.findMember(id);
+    const existsId = await this.membersRepository.LoginMember(id);
     if (existsId) {
       throw { message: "아이디가 이미 존재합니다" };
     }
@@ -34,23 +34,25 @@ class MembersService {
     };
   };
 
-  findMember = async (id, password) => {
-    const member = await this.membersRepository.findMember(id);
-    if (!member) {
+  LoginMember = async (id, password) => {
+    const user = await this.membersRepository.LoginMember(id);
+    if (!user) {
       throw { message: "아이디 또는 비밀번호가 일치하지 않습니다." };
     }
-    const validPassword = await bcrypt.compare(password, member.password);
+    const validPassword = await bcrypt.compare(password, user.password);
     if (!validPassword) {
       throw { message: "아이디 또는 비밀번호가 일치하지 않습니다." };
     }
-    return { token: jwt.sign({ userId: member.userId, id:member.id }, process.env.SECRET_KEY) };
+    const accessToken = jwt.sign({ userId: user.userId },process.env.SECRET_KEY,{ expiresIn: '300s' });
+    const refreshToken = jwt.sign({},process.env.SECRET_KEY,{ expiresIn: '1d' });
+    await this.membersRepository.updateRefresh(refreshToken, user);
+    // const findRefrshToken = await this.membersRepository.findRefrshToken(refreshToken, user);
+    // console.log(findRefrshToken);
+    return [user, accessToken];
   };
 
   updateMember = async (userId, name, password, email, phoneNum, birthday) => {
-    // if (name === undefined) {
-    //   await this.membersRepository.changePassword(userId);
-    //   return;
-    // }
+
     const existsEmail = await this.membersRepository.findMember(email);
     if (existsEmail) {
       throw { message: "이메일이 이미 존재합니다" };
