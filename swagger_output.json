@@ -5,7 +5,7 @@
     "title": "마켓 컬리커리커리",
     "description": ""
   },
-  "host": "localhost:3000",
+  "host": "www.cheolsu.shop",
   "basePath": "/",
   "tags": [
     {
@@ -29,7 +29,7 @@
       "description": "문의API"
     }
   ],
-  "schemes": ["http", "https"],
+  "schemes": ["https"],
   "securityDefinitions": {
     "apiKeyAuth": {
       "type": "apiKey",
@@ -52,9 +52,9 @@
             "type": "string"
           },
           {
-            "name": "body",
-            "in": "body",
-            "type": "string",
+            "name": "userId",
+            "in": "path",
+            "type": "integer",
             "schema": {
               "type": "object",
               "properties": {
@@ -195,7 +195,8 @@
             "name": "authorization",
             "in": "header",
             "type": "string"
-          },{
+          },
+          {
             "name": "body",
             "in": "body",
             "type": "string",
@@ -608,18 +609,6 @@
             "name": "authorization",
             "in": "header",
             "type": "string"
-          },
-          {
-            "name": "productId",
-            "in": "body",
-            "type": "string",
-            "required": true,
-            "properties": {
-              "productId": {
-                "example": "1",
-                "type": "integer"
-              }
-            }
           }
         ],
         "responses": {
@@ -744,7 +733,7 @@
         "parameters": [
           {
             "name": "questionId",
-            "in": "params",
+            "in": "path",
             "required": true,
             "type": "integer"
           },
@@ -762,6 +751,67 @@
             "description": "Unauthorized"
           }
         }
+      }
+    },
+    "/answer/message/code": {
+      "post": {
+        "tags": ["phoneAuth"],
+        "description": "문자 인증",
+        "parameters": [
+          {
+            "name": "tel",
+            "in": "body",
+            "type": "string",
+            "properties": {
+              "tel": {
+                "example": "010-0000-0000",
+                "type": "string"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/answer/mail": {
+      "post": {
+        "tags": ["emailAuth"],
+        "description": "",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "body",
+            "type": "string",
+            "properties": {
+              "email": { "example": "email@gmail.com" }
+            }
+          }
+        ],
+        "responses": {}
+      }
+    },
+    "/answer/codefind": {
+      "post": {
+        "tags": ["CodeCheck"],
+        "description": "",
+        "parameters": [
+          {
+            "name": "code",
+            "in": "body",
+            "type": "integer",
+            "properties": {
+              "code": { "example": "123456" }
+            }
+          }
+        ],
+        "responses": {}
       }
     },
     "/answer/": {
@@ -877,7 +927,7 @@
         "parameters": [
           {
             "name": "answerId",
-            "in": "params",
+            "in": "path",
             "required": true,
             "type": "string"
           },
