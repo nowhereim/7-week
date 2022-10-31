@@ -4,7 +4,9 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "start": "app.js",
+    "prestart": "node ./swagger.js"
   },
   "author": "",
   "license": "ISC",
@@ -18,7 +20,9 @@
     "jsonwebtoken": "^8.5.1",
     "mysql2": "^2.3.3",
     "sequelize": "^6.25.3",
-    "sequelize-cli": "^6.5.1"
+    "sequelize-cli": "^6.5.1",
+    "swagger-autogen": "^2.22.0",
+    "swagger-ui-express": "^4.5.0"
   },
   "devDependencies": {
     "sequelize-cli": "^6.5.2"

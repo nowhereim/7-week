@@ -27,6 +27,7 @@ class MembersController {
         return res.status(201).json( { message: "중복된 ID 입니다." } );
       } 
       await schema.validateAsync(req.body);
+
       await this.membersService.createMember(id, password, confirm, name, email, phoneNum, address, detailaddress, birthday);
       return res.status(201).json( { message: "회원가입이 완료되었습니다." } );
     } catch (err) {
@@ -58,7 +59,6 @@ class MembersController {
     } catch (err) {
       res.status(401).json({ errormessage: "err" });
     }
-    
   };
 
   updateMember = async (req, res, next) => {
