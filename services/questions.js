@@ -1,5 +1,6 @@
 const Questionsrepository = require("../repositories/questions");
-
+const mailSender = require("../authfunction/mail");
+const { Code } = require("../models");
 class Qaservice {
   // 새 인스턴스 생성
   questionsrepository = new Questionsrepository();
@@ -165,6 +166,50 @@ class Qaservice {
       if (err === null) {
         throw "전달값에 일치하는 답변이 존재하지 않습니다.";
       }
+      throw "서비스 파트에서 에러 발생. 태환이에게 문의하세요.";
+    }
+  };
+
+  maile = async (email) => {
+    try {
+      const randomNum = () => {
+        let num = "";
+        for (let i = 0; i < 6; i++) {
+          num += Math.floor(Math.random() * 10);
+        }
+        return num;
+      };
+
+      const authNum = randomNum();
+      let emailParam = {
+        toEmail: email, // 수신할 이메일
+
+        subject: "2조 마켓컬리 클론코딩 사이트에서 인증해주세요.", // 메일 제목
+
+        text:
+          "인증번호는 " +
+          authNum +
+          "입니다." +
+          "해당 인증 번호는 발송시간 기준 3분후 만료되므로 3분안에 인증을 완료해주세요", // 메일 내용
+      };
+
+      mailSender.sendMail(emailParam);
+
+      const maile = await this.questionsrepository.maile(authNum, email);
+      setTimeout(() => {
+        this.questionsrepository.mailcodedestroy(authNum);
+      }, 180000);
+      return maile;
+    } catch (err) {
+      throw "서비스 파트에서 에러 발생. 태환이에게 문의하세요.";
+    }
+  };
+
+  codefind = async (code) => {
+    try {
+      const codefind = await this.questionsrepository.codefind(code);
+      return codefind;
+    } catch (err) {
       throw "서비스 파트에서 에러 발생. 태환이에게 문의하세요.";
     }
   };
