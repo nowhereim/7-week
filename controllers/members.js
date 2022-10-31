@@ -19,6 +19,13 @@ class MembersController {
   SignupMember = async (req, res, next) => {
     try {
       const { id, password, confirm, name, email, phoneNum, address, detailaddress, birthday } = req.body;
+      const existsId = await this.membersService.existsId(id);
+      if (existsId === null) {
+        return res.status(201).json( { message: "사용가능한 ID 입니다."})
+      }
+      if (existsId.id === id) {
+        return res.status(201).json( { message: "중복된 ID 입니다." } );
+      } 
       await schema.validateAsync(req.body);
       await this.membersService.createMember(id, password, confirm, name, email, phoneNum, address, detailaddress, birthday);
       return res.status(201).json( { message: "회원가입이 완료되었습니다." } );

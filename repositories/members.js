@@ -6,8 +6,12 @@ class MembersRepository {
   }
   //회원가입
   createMember = async (id, password, confirm, name, email, phoneNum, address, detailaddress, birthday) => {
-    const createMembersData = await this.Members.create({ id, password, confirm, name, email, phoneNum, address, detailaddress, birthday });
-    return createMembersData;
+    await this.Members.create({ id, password, confirm, name, email, phoneNum, address, detailaddress, birthday });
+    return;
+  };
+  existsId = async (id) => {
+    const existsId = await this.Members.findOne({ where: { id } });
+    return existsId;
   };
   //user 정보가져오기
   LoginMember = async (id) => {
@@ -25,12 +29,6 @@ class MembersRepository {
     await Members.update({ refreshToken }, { where: { userId: user.userId } });
     console.log(user.refreshToken) 
   };
-
-  // findRefrshToken = async (refreshToken, user) => {
-  //   const findRefrshToken = await Members.findOne({where: {refreshToken: user.refreshToken}});
-  //   console.log(findRefrshToken.refreshToken);
-  //   return findRefrshToken
-  // }
 
   GetMember = async (userId, id) => {
     const GetMember = await this.Members.findOne({ where: { userId, id } });
