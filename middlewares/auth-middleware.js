@@ -43,6 +43,7 @@ module.exports = async (req, res, next) => {
       const { userId } = jwt.verify(tokenValue, process.env.SECRET_KEY);
       Members.findOne({ where: userId }).then((user) => {
         res.locals.user = user;
+        console.log(user.name)
         next();
       });
     }
