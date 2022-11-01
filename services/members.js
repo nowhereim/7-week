@@ -68,7 +68,7 @@ class MembersService {
     const accessToken = jwt.sign(
       { userId: user.userId },
       process.env.SECRET_KEY,
-      { expiresIn: "300s" }
+      { expiresIn: "1d" }
     );
     const refreshToken = jwt.sign({}, process.env.SECRET_KEY, {
       expiresIn: "1d",
