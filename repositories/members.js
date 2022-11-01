@@ -11,6 +11,7 @@ class MembersRepository {
   };
   existsId = async (id) => {
     const existsId = await this.Members.findOne({ where: { id } });
+    // console.log(existsId.id)
     return existsId;
   };
   //user 정보가져오기

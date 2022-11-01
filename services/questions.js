@@ -1,5 +1,5 @@
 const Questionsrepository = require("../repositories/questions");
-const mailSender = require("../authfunction/mail");
+// const mailSender = require("../authfunction/mail");
 const { Code } = require("../models");
 class Qaservice {
   // 새 인스턴스 생성
