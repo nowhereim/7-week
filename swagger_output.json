@@ -5,7 +5,7 @@
     "title": "마켓 컬리커리커리",
     "description": ""
   },
-  "host": "www.cheolsu.shop",
+  "host": "localhost:3000",
   "basePath": "/",
   "tags": [
     {
@@ -29,7 +29,7 @@
       "description": "문의API"
     }
   ],
-  "schemes": ["https"],
+  "schemes": ["http", "https"],
   "securityDefinitions": {
     "apiKeyAuth": {
       "type": "apiKey",
@@ -41,7 +41,7 @@
   "consumes": ["application/json"],
   "produces": ["application/json"],
   "paths": {
-    "/cart/": {
+    "/cart/{userId}": {
       "get": {
         "tags": ["Cart"],
         "description": "장바구니 전체 조회",
@@ -73,7 +73,9 @@
             "description": "Unauthorized"
           }
         }
-      },
+      }
+    },
+    "/cart/": {
       "post": {
         "tags": ["Cart"],
         "description": "장바구니 추가",
@@ -152,7 +154,9 @@
             "description": "Unauthorized"
           }
         }
-      },
+      }
+    },
+    "/cart/{cartId}": {
       "delete": {
         "tags": ["Cart"],
         "description": "장바구니 지정 삭제",
@@ -163,9 +167,9 @@
             "type": "string"
           },
           {
-            "name": "body",
-            "in": "body",
-            "type": "string",
+            "name": "cartId",
+            "in": "path",
+            "type": "integer",
             "schema": {
               "type": "object",
               "properties": {
@@ -186,7 +190,7 @@
         }
       }
     },
-    "/cart/all": {
+    "/cart/all/{userId}": {
       "delete": {
         "tags": ["Cart"],
         "description": "장바구니 전체 삭제",
@@ -197,9 +201,9 @@
             "type": "string"
           },
           {
-            "name": "body",
-            "in": "body",
-            "type": "string",
+            "name": "userId",
+            "in": "path",
+            "type": "integer",
             "schema": {
               "type": "object",
               "properties": {
@@ -361,7 +365,7 @@
                   "example": "컬리"
                 },
                 "deliveryType": {
-                  "example": "상품이미지"
+                  "example": "배송타입"
                 },
                 "salesUnit": {
                   "example": "1팩"

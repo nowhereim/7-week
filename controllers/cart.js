@@ -67,7 +67,7 @@ class Cartcontroller {
   // 장바구니 지정 삭제
   deleteCart = async (req, res, next) => {
     try {
-      const cartId = req.body.cartId;
+      const cartId = req.params.cartId;
       if (cartId === undefined) {
         throw "리퀘스트 값에 문제가 발생하였습니다.";
       }
@@ -82,7 +82,7 @@ class Cartcontroller {
   // 장바구니 전체 삭제
   deleteAllCart = async (req, res, next) => {
     try {
-      const userId = req.body.userId;
+      const userId = req.params.userId;
       if (userId === undefined) {
         throw "리퀘스트 값에 문제가 발생하였습니다.";
       }
