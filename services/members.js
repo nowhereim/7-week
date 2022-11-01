@@ -1,13 +1,23 @@
 const MembersRepository = require("../repositories/members");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
-require('dotenv').config();
+require("dotenv").config();
 
 class MembersService {
   constructor() {
     this.membersRepository = new MembersRepository();
   }
-  createMember = async (id, password, confirm, name, email, phoneNum, address, detailaddress, birthday) => {
+  createMember = async (
+    id,
+    password,
+    confirm,
+    name,
+    email,
+    phoneNum,
+    address,
+    detailaddress,
+    birthday
+  ) => {
     const existsEmail = await this.membersRepository.findMemberbyEmail(email);
     if (existsEmail) {
       throw { code: -3 };
@@ -16,14 +26,24 @@ class MembersService {
     const salt = await bcrypt.genSalt(10);
     const enpryptedPW = bcrypt.hashSync(password, salt);
     password = enpryptedPW;
-    await this.membersRepository.createMember(id, password, confirm, name, email, phoneNum, address, detailaddress, birthday);
+    await this.membersRepository.createMember(
+      id,
+      password,
+      confirm,
+      name,
+      email,
+      phoneNum,
+      address,
+      detailaddress,
+      birthday
+    );
     return;
   };
 
   existsId = async (id) => {
     const existsId = await this.membersRepository.existsId(id);
     return existsId;
-  }
+  };
 
   GetMember = async (userId, id) => {
     const GetMember = await this.membersRepository.GetMember(userId, id);
@@ -32,7 +52,7 @@ class MembersService {
       id: GetMember.id,
       name: GetMember.name,
       email: GetMember.email,
-      phoneNum: GetMember.phoneNum
+      phoneNum: GetMember.phoneNum,
     };
   };
 
@@ -45,14 +65,19 @@ class MembersService {
     if (!validPassword) {
       throw { message: "아이디 또는 비밀번호가 일치하지 않습니다." };
     }
-    const accessToken = jwt.sign({ userId: user.userId },process.env.SECRET_KEY,{ expiresIn: '300s' });
-    const refreshToken = jwt.sign({},process.env.SECRET_KEY,{ expiresIn: '1d' });
+    const accessToken = jwt.sign(
+      { userId: user.userId },
+      process.env.SECRET_KEY,
+      { expiresIn: "300s" }
+    );
+    const refreshToken = jwt.sign({}, process.env.SECRET_KEY, {
+      expiresIn: "1d",
+    });
     await this.membersRepository.updateRefresh(refreshToken, user);
     return [user, accessToken];
   };
 
   updateMember = async (userId, name, password, email, phoneNum, birthday) => {
-
     const existsEmail = await this.membersRepository.findMember(email);
     if (existsEmail) {
       throw { message: "이메일이 이미 존재합니다" };
@@ -60,7 +85,14 @@ class MembersService {
     const salt = await bcrypt.genSalt(10);
     const bryptedPW = bcrypt.hashSync(password, salt);
     password = bryptedPW;
-    await this.membersRepository.updateMember(userId, name, password, email, phoneNum, birthday);
+    await this.membersRepository.updateMember(
+      userId,
+      name,
+      password,
+      email,
+      phoneNum,
+      birthday
+    );
     const lookUpdate = await this.membersRepository.lookUpdateMember(userId);
     return lookUpdate;
   };

@@ -7,7 +7,7 @@ const middleware = require("../middlewares/auth-middleware");
 router.get("/:userId", middleware, cartcontroller.getCart);
 router.post("/", middleware, cartcontroller.createCart);
 router.put("/", middleware, cartcontroller.updateCart);
-router.delete("/", middleware, cartcontroller.deleteCart);
-router.delete("/all", middleware, cartcontroller.deleteAllCart);
+router.delete("/:cartId", middleware, cartcontroller.deleteCart);
+router.delete("/all/:userId", middleware, cartcontroller.deleteAllCart);
 
 module.exports = router;
