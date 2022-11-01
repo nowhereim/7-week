@@ -9,5 +9,4 @@ router.post("/login", membersController.LoginMember);
 router.put("/login", middleware, membersController.updateMember);
 router.delete("/login", middleware, membersController.deleteMember);
 router.get("/login/:id", middleware, membersController.GetMember);
-
 module.exports = router;

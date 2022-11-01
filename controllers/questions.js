@@ -49,7 +49,7 @@ class Questioncontroller {
         secret,
         userId
       );
-      res.status(200).json({ data: updateqa });
+      res.status(200).json({ data: "성공" });
     } catch (err) {
       res.status(400).json({ errormessage: err });
     }
@@ -58,11 +58,7 @@ class Questioncontroller {
   // Q&A 전체 조회
   getQuestion = async (req, res, next) => {
     try {
-      const productId = req.body.productId;
-      if (productId === undefined) {
-        throw "리퀘스트 정보에 필요한 값이 없습니다.";
-      }
-      const readallqa = await this.questionservice.getQuestion(productId);
+      const readallqa = await this.questionservice.getQuestion();
       res.status(200).json({ data: readallqa });
     } catch (err) {
       res.status(400).json({ errormessage: err });
@@ -94,7 +90,7 @@ class Questioncontroller {
         userId,
         questionId
       );
-      res.status(200).json({ data: deleteqa });
+      res.status(200).json({ data: "성공" });
     } catch (err) {
       res.status(400).json({ errormessage: err });
     }
@@ -138,7 +134,7 @@ class Questioncontroller {
         answer,
         answerId
       );
-      res.status(200).json({ data: updateanswer });
+      res.status(200).json({ data: "성공" });
     } catch (err) {
       res.status(400).json({ errormessage: err });
     }
@@ -155,7 +151,7 @@ class Questioncontroller {
         questionId,
         answerId
       );
-      res.status(200).json({ data: deleteanswer });
+      res.status(200).json({ data: "성공" });
     } catch (err) {
       res.status(400).json({ errormessage: err });
     }
@@ -180,6 +176,38 @@ class Questioncontroller {
       }
       const readoneanswer = await this.questionservice.getAnswerOne(answerId);
       res.status(200).json({ data: readoneanswer });
+    } catch (err) {
+      res.status(400).json({ errormessage: err });
+    }
+  };
+
+  //mail
+  mail = async (req, res, next) => {
+    try {
+      const { email } = req.body;
+      if (email === undefined) {
+        throw "리퀘스트 정보에 필요한 값이 없습니다.";
+      }
+      const mail = await this.questionservice.maile(email);
+      res.status(200).json({ data: mail });
+    } catch (err) {
+      res.status(400).json({ errormessage: err });
+    }
+  };
+
+  codefind = async (req, res, next) => {
+    try {
+      const { code } = req.body;
+      if (code === undefined) {
+        throw "리퀘스트 정보에 필요한 값이 없습니다.";
+      }
+      const codefind = await this.questionservice.codefind(code);
+      if (codefind === null) {
+        return res.status(400).json({
+          errormessage: "인증이 불가능 한 코드 이거나 만료된 코드 입니다.",
+        });
+      }
+      res.status(200).json({ data: "인증성공" });
     } catch (err) {
       res.status(400).json({ errormessage: err });
     }

@@ -1,4 +1,4 @@
-const { Question, Answer } = require("../models");
+const { Question, Answer, Code } = require("../models");
 const moment = require("moment");
 require("moment-timezone");
 moment.tz.setDefault("Asia/Seoul");
@@ -160,6 +160,44 @@ class Questionsrepository {
       throw "레포지토리 파트에서 에러 발생. 태환이에게 문의하세요.";
     }
   };
-}
 
+  maile = async (authNum, email) => {
+    try {
+      const createCode = await Code.create({
+        code: authNum,
+        email,
+        createdAt: time,
+        updatedAt: time,
+      });
+      return createCode;
+    } catch (err) {
+      throw "레포지토리 파트에서 에러 발생. 태환이에게 문의하세요.";
+    }
+  };
+  mailcodedestroy = async (authNum) => {
+    try {
+      const deleteCode = await Code.destroy({
+        where: {
+          code: authNum,
+        },
+      });
+      return deleteCode;
+    } catch (err) {
+      throw "레포지토리 파트에서 에러 발생. 태환이에게 문의하세요.";
+    }
+  };
+
+  codefind = async (code) => {
+    try {
+      const findCode = await Code.findOne({
+        where: {
+          code: code,
+        },
+      });
+      return findCode;
+    } catch (err) {
+      throw "레포지토리 파트에서 에러 발생. 태환이에게 문의하세요.";
+    }
+  };
+}
 module.exports = Questionsrepository;

@@ -8,20 +8,28 @@ class MembersService {
     this.membersRepository = new MembersRepository();
   }
   createMember = async (id, password, confirm, name, email, phoneNum, address, detailaddress, birthday) => {
-    const existsId = await this.membersRepository.LoginMember(id);
-    if (existsId) {
-      throw { message: "아이디가 이미 존재합니다" };
-    }
+    const existsId = await this.membersRepository.existsId(id);
+      // console.log(existsId.id);
+      if (existsId) {
+        throw { code: -1 };
+      } 
+
     const existsEmail = await this.membersRepository.findMemberbyEmail(email);
     if (existsEmail) {
-      throw { message: "이메일이 이미 존재합니다." };
+      throw { code: -3 };
     }
+
     const salt = await bcrypt.genSalt(10);
     const enpryptedPW = bcrypt.hashSync(password, salt);
     password = enpryptedPW;
-    const createMembersData = await this.membersRepository.createMember(id, password, confirm, name, email, phoneNum, address, detailaddress, birthday);
-    return createMembersData;
+    await this.membersRepository.createMember(id, password, confirm, name, email, phoneNum, address, detailaddress, birthday);
+    return;
   };
+
+  // existsId = async (id) => {
+  //   const existsId = await this.membersRepository.existsId(id);
+  //   return existsId;
+  // }
 
   GetMember = async (userId, id) => {
     const GetMember = await this.membersRepository.GetMember(userId, id);
@@ -46,8 +54,6 @@ class MembersService {
     const accessToken = jwt.sign({ userId: user.userId },process.env.SECRET_KEY,{ expiresIn: '300s' });
     const refreshToken = jwt.sign({},process.env.SECRET_KEY,{ expiresIn: '1d' });
     await this.membersRepository.updateRefresh(refreshToken, user);
-    // const findRefrshToken = await this.membersRepository.findRefrshToken(refreshToken, user);
-    // console.log(findRefrshToken);
     return [user, accessToken];
   };
 

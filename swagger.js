@@ -7,8 +7,8 @@ const doc = {
     title: "마켓 컬리커리커리",
     description: "",
   },
-  host: "localhost:3000",
-  schemes: ["http", "https"],
+  host: "www.cheolsu.shop",
+  schemes: ["http", "https"], // http, https 중 http는 로컬에서만 사용
   consumes: ["application/json"],
   produces: ["application/json"],
   tags: [

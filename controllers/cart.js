@@ -51,7 +51,7 @@ class Cartcontroller {
   // 장바구니 전체 조회
   getCart = async (req, res, next) => {
     try {
-      const userId = req.body.userId;
+      const userId = req.params.userId;
       console.log(userId);
       if (userId === undefined) {
         throw "리퀘스트 값에 문제가 발생하였습니다.";
