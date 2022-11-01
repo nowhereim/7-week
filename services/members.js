@@ -18,12 +18,6 @@ class MembersService {
     detailaddress,
     birthday
   ) => {
-    const existsId = await this.membersRepository.existsId(id);
-    // console.log(existsId.id);
-    if (existsId) {
-      throw { code: -1 };
-    }
-
     const existsEmail = await this.membersRepository.findMemberbyEmail(email);
     if (existsEmail) {
       throw { code: -3 };
@@ -46,10 +40,10 @@ class MembersService {
     return;
   };
 
-  // existsId = async (id) => {
-  //   const existsId = await this.membersRepository.existsId(id);
-  //   return existsId;
-  // }
+  existsId = async (id) => {
+    const existsId = await this.membersRepository.existsId(id);
+    return existsId;
+  };
 
   GetMember = async (userId, id) => {
     const GetMember = await this.membersRepository.GetMember(userId, id);
@@ -74,7 +68,7 @@ class MembersService {
     const accessToken = jwt.sign(
       { userId: user.userId },
       process.env.SECRET_KEY,
-      { expiresIn: "1d" }
+      { expiresIn: "300s" }
     );
     const refreshToken = jwt.sign({}, process.env.SECRET_KEY, {
       expiresIn: "1d",
