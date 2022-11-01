@@ -156,8 +156,12 @@ class GoodsController {
         recommendation,
         brand
       );
-
-      res.status(200).json({ data: updateGoods });
+      if (updateGoods[0] === 0) {
+        return res.status(401).send({ errormessage: "존재하지 않는 상품입니덩" });
+      } else if (updateGoods[0] === 1) {
+        return res.status(200).json({ message: "수정 완료!" });
+      }
+      throw error;
     } catch (err) {
       if (err.code === -1) {
         res.status(401).send({ errormessage: "없는 상품인디요?" });
@@ -175,8 +179,12 @@ class GoodsController {
       const { goodsId } = req.params;
 
       const deleteGoods = await this.goodsService.deleteGoods(goodsId);
-
-      res.status(200).json({ data: deleteGoods });
+      if (deleteGoods[0] === 0) {
+        return res.status(401).send({ errormessage: "존재하지 않는 상품입니덩" });
+      } else if (deleteGoods[0] === 1) {
+        return res.status(200).json({ message: "수정 완료!" });
+      }
+      throw error;
     } catch (err) {
       if (err.code === -1) {
         res.status(401).send({ errormessage: "없는 상품인디요?" });

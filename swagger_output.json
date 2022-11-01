@@ -361,7 +361,7 @@
                   "example": "컬리"
                 },
                 "deliveryType": {
-                  "example": "상품이미지"
+                  "example": "배송타입"
                 },
                 "salesUnit": {
                   "example": "1팩"
