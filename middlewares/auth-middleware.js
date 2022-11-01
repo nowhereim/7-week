@@ -41,6 +41,8 @@ module.exports = async (req, res, next) => {
       });
     } else {
       const { userId } = jwt.verify(tokenValue, process.env.SECRET_KEY);
+      const a = jwt.decode(tokenValue, process.env.SECRET_KEY);
+      console.log(a)
       Members.findOne({ where: userId }).then((user) => {
         res.locals.user = user;
         next();

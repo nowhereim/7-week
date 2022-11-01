@@ -35,8 +35,7 @@ class MembersController {
         res.status(401).json({ errormessage: "비밀번호를 입력해주세요." });
       }else {
         res.status(401).json({ errormessage: "빈칸을 모두 알맞게 작성해주세요." });
-      }
-      
+      }     
     }
   };
 
