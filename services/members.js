@@ -72,13 +72,16 @@ class MembersService {
   };
 
   updateMember = async (userId, name, password, email, phoneNum, birthday) => {
-    const existsEmail = await this.membersRepository.findMember(email);
+    console.log(userId, name, password, email, phoneNum, birthday)
+    const existsEmail = await this.membersRepository.findMemberbyEmail(email);
+    console.log(existsEmail)
     if (existsEmail) {
-      throw { message: "이메일이 이미 존재합니다" };
+      throw { code: -3 };
     }
     const salt = await bcrypt.genSalt(10);
     const bryptedPW = bcrypt.hashSync(password, salt);
     password = bryptedPW;
+    console.log(userId, name, password, email, phoneNum, birthday)
     await this.membersRepository.updateMember(
       userId,
       name,
