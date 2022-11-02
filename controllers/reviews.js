@@ -77,8 +77,7 @@ class ReviewsController {
         return res.status(401).send({ errormessage: "존재하지 않는 리뷰입니덩" });
       } else if (updateReview[0] === 1) {
         return res.status(200).json({ message: "수정 완료!" });
-      }
-      throw error;
+      } else throw error;
     } catch (err) {
       if (err.code === -2) {
         res.status(401).send({ errormessage: "님꺼 아님ㅠㅠ" });
@@ -99,8 +98,7 @@ class ReviewsController {
         return res.status(401).send({ errormessage: "존재하지 않는 리뷰입니덩" });
       } else if (deleteReview[0] === 1) {
         return res.status(200).json({ message: "삭제 완료" });
-      }
-      throw error;
+      } else throw error;
     } catch (err) {
       if (err.code === -2) {
         res.status(401).send({ errormessage: "님꺼 아님ㅠㅠ" });
