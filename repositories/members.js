@@ -21,8 +21,10 @@ class MembersRepository {
   };
   //email중복검사
   findMemberbyEmail = async (email) => {
-    const member = await this.Members.findOne({ where: { email } });
-    return member;
+    console.log(email)
+    const existsEmail = await this.Members.findOne({ where: { email } });
+    console.log(existsEmail)
+    return existsEmail;
   };
   //Refresh토큰 업데이트
   updateRefresh = async (refreshToken, user) => {
@@ -42,6 +44,7 @@ class MembersRepository {
   };
   //회원정보 수정
   updateMember = async (userId, name, password, email, phoneNum, birthday) => {
+    console.log(userId, name, password, email, phoneNum, birthday)
     await this.Members.update(
       { name, password, email, phoneNum, birthday }, { where: { userId } }
     );
