@@ -36,8 +36,9 @@ class ReviewsService {
 
   updateReview = async (name, reviewId, review, reviewImage) => {
     const findUser = await this.reviewsRepository.findUser(name);
-
-    if (findUser.name !== name) {
+    if (!findUser) {
+      throw { code: -2 };
+    } else if (findUser.name !== name) {
       throw { code: -2 };
     }
 
@@ -62,7 +63,9 @@ class ReviewsService {
   deleteReview = async (name, reviewId) => {
     const findUser = await this.reviewsRepository.findUser(name);
 
-    if (findUser.name !== name) {
+    if (!findUser) {
+      throw { code: -2 };
+    } else if (findUser.name !== name) {
       throw { code: -2 };
     }
 
