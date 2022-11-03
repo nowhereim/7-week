@@ -9,11 +9,11 @@ class MembersRepository {
     await this.Members.create({ id, password, confirm, name, email, phoneNum, address, detailaddress, birthday });
     return;
   };
-  existsId = async (id) => {
-    const existsId = await this.Members.findOne({ where: { id } });
-    // console.log(existsId.id)
-    return existsId;
-  };
+  // existsId = async (id) => {
+  //   const existsId = await this.Members.findOne({ where: { id } });
+  //   // console.log(existsId.id)
+  //   return existsId;
+  // };
   //user 정보가져오기
   LoginMember = async (id) => {
     const user = await this.Members.findOne({ where: { id } });
@@ -33,9 +33,9 @@ class MembersRepository {
     console.log(user.refreshToken) 
   };
 
-  GetMember = async (userId, id) => {
-    const GetMember = await this.Members.findOne({ where: { userId, id } });
-    return GetMember;
+  FindId = async (id) => {
+    const FindId = await this.Members.findOne({ where: { id } });
+    return FindId;
   };
 
   lookUpdateMember = async (userId) => {
