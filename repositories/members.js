@@ -9,11 +9,11 @@ class MembersRepository {
     await this.Members.create({ id, password, confirm, name, email, phoneNum, address, detailaddress, birthday });
     return;
   };
-  existsId = async (id) => {
-    const existsId = await this.Members.findOne({ where: { id } });
-    // console.log(existsId.id)
-    return existsId;
-  };
+  // existsId = async (id) => {
+  //   const existsId = await this.Members.findOne({ where: { id } });
+  //   // console.log(existsId.id)
+  //   return existsId;
+  // };
   //user 정보가져오기
   LoginMember = async (id) => {
     const user = await this.Members.findOne({ where: { id } });
@@ -21,8 +21,10 @@ class MembersRepository {
   };
   //email중복검사
   findMemberbyEmail = async (email) => {
-    const member = await this.Members.findOne({ where: { email } });
-    return member;
+    console.log(email)
+    const existsEmail = await this.Members.findOne({ where: { email } });
+    console.log(existsEmail)
+    return existsEmail;
   };
   //Refresh토큰 업데이트
   updateRefresh = async (refreshToken, user) => {
@@ -31,9 +33,9 @@ class MembersRepository {
     console.log(user.refreshToken) 
   };
 
-  GetMember = async (userId, id) => {
-    const GetMember = await this.Members.findOne({ where: { userId, id } });
-    return GetMember;
+  FindId = async (id) => {
+    const FindId = await this.Members.findOne({ where: { id } });
+    return FindId;
   };
 
   lookUpdateMember = async (userId) => {
@@ -42,6 +44,7 @@ class MembersRepository {
   };
   //회원정보 수정
   updateMember = async (userId, name, password, email, phoneNum, birthday) => {
+    console.log(userId, name, password, email, phoneNum, birthday)
     await this.Members.update(
       { name, password, email, phoneNum, birthday }, { where: { userId } }
     );

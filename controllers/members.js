@@ -89,7 +89,7 @@ class MembersController {
         .status(201)
         .json({ data: MemberData, message: "정상적으로 조회되었습니다." });
     } catch (err) {
-      res.status(401).json({ errormessage: "err" });
+      res.status(401).json({ errormessage: "다시 입력해주세요" });
     }
   };
 
@@ -97,6 +97,7 @@ class MembersController {
     try {
       const { userId } = res.locals.user;
       const { name, password, confirm, email, phoneNum, birthday } = req.body;
+      console.log(req.body);
       await schema.validateAsync(req.body);
       const lookUpdate = await this.membersService.updateMember(
         userId,
@@ -110,7 +111,11 @@ class MembersController {
         .status(201)
         .json({ data: lookUpdate, message: "수정을 완료하였습니다." });
     } catch (err) {
-      res.status(401).json({ errormessage: err });
+      if (err.code === -3) {
+        res.status(401).json({ errormessage: "이미 가입한 이메일입니다." });
+      } else {
+        res.status(401).json({ errormessage: err });
+      }
     }
   };
 

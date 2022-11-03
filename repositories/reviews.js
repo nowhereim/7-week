@@ -5,8 +5,7 @@ const { Reviews } = require("../models");
 class ReviewsRepository {
   //작성자 확인
   findUser = async (name) => {
-    const findUser = await Members.findOne({ where: { name } });
-
+    const findUser = await Reviews.findOne({ where: { name } });
     return findUser;
   };
   //리뷰 작성

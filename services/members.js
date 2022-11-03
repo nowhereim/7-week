@@ -45,15 +45,12 @@ class MembersService {
     return existsId;
   };
 
-  GetMember = async (userId, id) => {
-    const GetMember = await this.membersRepository.GetMember(userId, id);
-    return {
-      userId: GetMember.userId,
-      id: GetMember.id,
-      name: GetMember.name,
-      email: GetMember.email,
-      phoneNum: GetMember.phoneNum,
-    };
+  FindId = async (id) => {
+    const FindId = await this.membersRepository.FindId(id);
+      // if (FindId) {
+      //   throw { code: -1 };
+      // }
+    return FindId;
   };
 
   LoginMember = async (id, password) => {
@@ -78,13 +75,16 @@ class MembersService {
   };
 
   updateMember = async (userId, name, password, email, phoneNum, birthday) => {
-    const existsEmail = await this.membersRepository.findMember(email);
+    console.log(userId, name, password, email, phoneNum, birthday)
+    const existsEmail = await this.membersRepository.findMemberbyEmail(email);
+    console.log(existsEmail)
     if (existsEmail) {
-      throw { message: "이메일이 이미 존재합니다" };
+      throw { code: -3 };
     }
     const salt = await bcrypt.genSalt(10);
     const bryptedPW = bcrypt.hashSync(password, salt);
     password = bryptedPW;
+    console.log(userId, name, password, email, phoneNum, birthday)
     await this.membersRepository.updateMember(
       userId,
       name,
