@@ -5,7 +5,7 @@
     "title": "마켓 컬리커리커리",
     "description": ""
   },
-  "host": "localhost:3000",
+  "host": "www.cheolsu.shop",
   "basePath": "/",
   "tags": [
     {
@@ -29,7 +29,7 @@
       "description": "문의API"
     }
   ],
-  "schemes": ["http", "https"],
+  "schemes": ["https"],
   "securityDefinitions": {
     "apiKeyAuth": {
       "type": "apiKey",
@@ -97,6 +97,9 @@
                 },
                 "productId": {
                   "example": "상품 아이디"
+                },
+                "productImage": {
+                  "example": "상품 이미지"
                 },
                 "quantity": {
                   "example": "quantity"

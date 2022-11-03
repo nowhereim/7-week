@@ -5,10 +5,18 @@ class Cartservice {
   cartrepository = new cartrepository();
 
   // 장바구니 추가
-  createCart = async (userId, productId, quantity, price, productName) => {
+  createCart = async (
+    userId,
+    productImage,
+    productId,
+    quantity,
+    price,
+    productName
+  ) => {
     try {
       const createCart = await this.cartrepository.createCart(
         userId,
+        productImage,
         productId,
         quantity,
         price,

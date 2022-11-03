@@ -8,7 +8,8 @@ class Cartcontroller {
   // 장바구니 추가
   createCart = async (req, res, next) => {
     try {
-      const { userId, productId, quantity, price, productName } = req.body;
+      const { userId, productImage, productId, quantity, price, productName } =
+        req.body;
       if (
         userId === undefined ||
         productId === undefined ||
@@ -20,6 +21,7 @@ class Cartcontroller {
       }
       const createcart = await this.cartservice.createCart(
         userId,
+        productImage,
         productId,
         quantity,
         price,

@@ -62,8 +62,14 @@ class MembersService {
     if (!validPassword) {
       throw { message: "아이디 또는 비밀번호가 일치하지 않습니다." };
     }
-    const accessToken = jwt.sign({ userId: user.userId, name: user.name },process.env.SECRET_KEY,{ expiresIn: '1d' });
-    const refreshToken = jwt.sign({},process.env.SECRET_KEY,{ expiresIn: '1d' });
+    const accessToken = jwt.sign(
+      { userId: user.userId, name: user.name },
+      process.env.SECRET_KEY,
+      { expiresIn: "1d" }
+    );
+    const refreshToken = jwt.sign({}, process.env.SECRET_KEY, {
+      expiresIn: "1d",
+    });
     await this.membersRepository.updateRefresh(refreshToken, user);
     return [user, accessToken];
   };
