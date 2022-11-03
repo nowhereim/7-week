@@ -45,15 +45,12 @@ class MembersService {
     return existsId;
   };
 
-  GetMember = async (userId, id) => {
-    const GetMember = await this.membersRepository.GetMember(userId, id);
-    return {
-      userId: GetMember.userId,
-      id: GetMember.id,
-      name: GetMember.name,
-      email: GetMember.email,
-      phoneNum: GetMember.phoneNum,
-    };
+  FindId = async (id) => {
+    const FindId = await this.membersRepository.FindId(id);
+      // if (FindId) {
+      //   throw { code: -1 };
+      // }
+    return FindId;
   };
 
   LoginMember = async (id, password) => {

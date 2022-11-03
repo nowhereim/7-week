@@ -20,11 +20,11 @@ class MembersController {
   SignupMember = async (req, res, next) => {
     try {
       const { id, password, confirm, name, email, phoneNum, address, detailaddress, birthday } = req.body;
-      const existsId = await this.membersService.existsId(id)
-      if (existsId) {
-        res.status(412).json( { message: "중복된 아이디 입니다." } );
-        return;
-      }
+      // const existsId = await this.membersService.existsId(id)
+      // if (existsId) {
+      //   res.status(412).json( { message: "중복된 아이디 입니다." } );
+      //   return;
+      // }
       await schema.validateAsync(req.body);
       await this.membersService.createMember(id, password, confirm, name, email, phoneNum, address, detailaddress, birthday);
       return res.status(201).json( { message: "회원가입이 완료되었습니다." } );
@@ -54,14 +54,21 @@ class MembersController {
     }
   };
 
-  GetMember = async (req, res, next) => {
+  FindId = async (req, res, next) => {
     try{
-      const { userId } = res.locals.user;
-      const { id } = req.params;
-      const MemberData = await this.membersService.GetMember( userId, id );
-      return res.status(201).json( { data: MemberData , message:"정상적으로 조회되었습니다."} );
+      const { id } = req.body;
+      await schema.validateAsync(req.body);
+      const FindId = await this.membersService.FindId( id );
+        if (FindId) {
+          return res.status(412).json( { message:"중복된 아이디 입니다." } );
+        }
+        if (!FindId) {
+          return res.status(201).json( { message:"사용가능한 아이디 입니다." } );
+        }
+        
+
     } catch (err) {
-      res.status(401).json({ errormessage: "err" });
+      res.status(401).json({ errormessage: "다시 입력해주세요" });
     }
   };
 
