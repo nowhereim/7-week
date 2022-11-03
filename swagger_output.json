@@ -98,6 +98,9 @@
                 "productId": {
                   "example": "상품 아이디"
                 },
+                "productImage": {
+                  "example": "상품 이미지"
+                },
                 "quantity": {
                   "example": "quantity"
                 },
@@ -258,7 +261,7 @@
                   "example": "컬리"
                 },
                 "deliveryType": {
-                  "example": "상품이미지"
+                  "example": "배송타입"
                 },
                 "salesUnit": {
                   "example": "1팩"
@@ -365,7 +368,7 @@
                   "example": "컬리"
                 },
                 "deliveryType": {
-                  "example": "상품이미지"
+                  "example": "배송타입"
                 },
                 "salesUnit": {
                   "example": "1팩"

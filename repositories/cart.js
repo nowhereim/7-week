@@ -2,10 +2,18 @@ const { Cart } = require("../models");
 
 class Cartrepository {
   // 장바구니 추가
-  createCart = async (userId, productId, quantity, price, productName) => {
+  createCart = async (
+    userId,
+    productImage,
+    productId,
+    quantity,
+    price,
+    productName
+  ) => {
     try {
       const createCart = await Cart.create({
         userId,
+        productImage,
         productId,
         quantity,
         price,

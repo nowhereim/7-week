@@ -1,5 +1,5 @@
 const Questionsrepository = require("../repositories/questions");
-// const mailSender = require("../authfunction/mail");
+const mailSender = require("../authfunction/mail");
 const { Code } = require("../models");
 class Qaservice {
   // 새 인스턴스 생성
@@ -181,6 +181,7 @@ class Qaservice {
       };
 
       const authNum = randomNum();
+
       let emailParam = {
         toEmail: email, // 수신할 이메일
 

@@ -66,7 +66,7 @@ class MembersService {
       throw { message: "아이디 또는 비밀번호가 일치하지 않습니다." };
     }
     const accessToken = jwt.sign(
-      { userId: user.userId },
+      { userId: user.userId, name: user.name },
       process.env.SECRET_KEY,
       { expiresIn: "1d" }
     );
