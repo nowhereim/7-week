@@ -4,9 +4,9 @@
 대한민국 유니콘기업의 선두주자 마켓컬리의 다양한 기능들을 클론코딩 하였습니다.
 
 # 📌 링크
-백엔드 <a href="www.cheolsu.shop">도메인</a> 링크
+백엔드 <a href="https://www.cheolsu.shop">도메인</a> 링크
 
-백엔드 <a href="www.cheolsu.shop/swagger">스웨거</a> 링크
+백엔드 <a href="https://www.cheolsu.shop/swagger">스웨거</a> 링크
 
 <a href="https://resolute-wineberry-8e7.notion.site/7-SA-2-9bf1b1674334470787443e9e1172661c">Notion</a> 링크
 
