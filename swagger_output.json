@@ -15,7 +15,7 @@
     {
       "name": "Goods",
       "description": "상품API"
-    },
+    }, 
     {
       "name": "Cart",
       "description": "장바구니API"
